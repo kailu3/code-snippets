@@ -1,0 +1,986 @@
+---
+redirect_from:
+  - "/prob-models/shifted-beta-geometric"
+interact_link: content/prob-models/shifted-Beta-Geometric.ipynb
+kernel_name: python3
+kernel_path: content/prob-models
+has_widgets: false
+title: |-
+  Shifted-beta-geometric
+pagenum: 15
+prev_page:
+  url: /prob-models/intro.html
+next_page:
+  url: /prob-models/Negative-Binomial.html
+suffix: .ipynb
+search: probably want python package after ends since idea excel here implementation sbg though modeling discrete contractional behaviour wish clean shit example period calibration
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    <div id="page-info"><div id="page-title">Shifted-beta-geometric</div>
+</div>
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>Probably want to write a Python package after 476 ends since I have idea how to use Excel. Here is an implementation of sBG though, for modeling discrete-time, contractional behaviour. Wish I had more time to clean up this shit.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">minimize</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_probabilities</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Compute the probability of a random person churning for each time period&#39;&#39;&#39;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="n">alpha</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">num_periods</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">beta</span> <span class="o">+</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">+</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">p</span>
+
+
+<span class="k">def</span> <span class="nf">pct_dying</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Compute the number of people who churn for each time period&#39;&#39;&#39;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">n</span>
+
+
+<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Objective function that we need to maximize to get best alpha and beta parameters</span>
+<span class="sd">    **Computed log-likelihood will be 1/n smaller than the actual log-likelihood (n = original sample size)**</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">alpha</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">beta</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">99999</span>
+    <span class="n">probabilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">compute_probabilities</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+    <span class="n">percent_dying</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pct_dying</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span> <span class="o">*</span> <span class="n">percent_dying</span><span class="p">)</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">probabilities</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">maximize</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Maximize log-likelihood by searching for best (alpha, beta) combination&#39;&#39;&#39;</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="p">)</span> <span class="c1"># x is a tuple (alpha, beta)</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">])</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Nelder-Mead&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;xtol&#39;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="s1">&#39;disp&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+
+
+<span class="k">def</span> <span class="nf">forecast</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Forecast num_periods from the data using the sBG model&#39;&#39;&#39;</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">maximize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">probabilities</span> <span class="o">=</span> <span class="n">compute_probabilities</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">)</span>
+    
+    <span class="n">expected_alive</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">probabilities</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+        <span class="n">expected_alive</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">probabilities</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+    
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">expected_alive</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">forecast_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Creates dataframe with forecast with additional performance columns&#39;&#39;&#39;</span>
+    <span class="n">forecast_column</span> <span class="o">=</span> <span class="n">forecast</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">)</span>
+    <span class="n">actual_column</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="n">period</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Period&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_periods</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))})</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Actual&#39;</span><span class="p">:</span> <span class="n">actual_column</span><span class="p">})</span>
+    <span class="n">the_forecast</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Forecast&#39;</span><span class="p">:</span> <span class="n">forecast_column</span><span class="p">})</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">period</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">the_forecast</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Compute pct error as well</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;pct_error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Actual&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Forecast&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Actual&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>   
+    
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Example">Example<a class="anchor-link" href="#Example"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/sBG-1.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Regular</th>
+      <th>Regular % Alive</th>
+      <th>Highend</th>
+      <th>Highend % Alive</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>631</td>
+      <td>0.631</td>
+      <td>869</td>
+      <td>0.869</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>468</td>
+      <td>0.468</td>
+      <td>743</td>
+      <td>0.743</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>382</td>
+      <td>0.382</td>
+      <td>653</td>
+      <td>0.653</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>326</td>
+      <td>0.326</td>
+      <td>593</td>
+      <td>0.593</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>289</td>
+      <td>0.289</td>
+      <td>551</td>
+      <td>0.551</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>262</td>
+      <td>0.262</td>
+      <td>517</td>
+      <td>0.517</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>241</td>
+      <td>0.241</td>
+      <td>491</td>
+      <td>0.491</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>223</td>
+      <td>0.223</td>
+      <td>468</td>
+      <td>0.468</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>207</td>
+      <td>0.207</td>
+      <td>445</td>
+      <td>0.445</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>194</td>
+      <td>0.194</td>
+      <td>427</td>
+      <td>0.427</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>183</td>
+      <td>0.183</td>
+      <td>409</td>
+      <td>0.409</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>173</td>
+      <td>0.173</td>
+      <td>394</td>
+      <td>0.394</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="7-Period-Calibration">7-Period Calibration<a class="anchor-link" href="#7-Period-Calibration"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get predictions on 12 periods using 7 periods of data for both segments</span>
+<span class="n">regular_series</span> <span class="o">=</span> <span class="n">forecast</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;Regular % Alive&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">highend_series</span> <span class="o">=</span> <span class="n">forecast</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;Highend % Alive&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span> <span class="mi">12</span><span class="p">)</span>
+
+<span class="n">regular_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Year&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+                           <span class="s1">&#39;Expected %&#39;</span><span class="p">:</span> <span class="n">regular_series</span>
+                          <span class="p">})</span>
+
+
+<span class="n">highend_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Year&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+                           <span class="s1">&#39;Expected %&#39;</span><span class="p">:</span> <span class="n">highend_series</span>
+                          <span class="p">})</span>
+
+<span class="n">regular_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Regular&#39;</span><span class="p">,</span> <span class="s1">&#39;Regular % Alive&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">regular_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+        <span class="n">Expected</span><span class="o">=</span><span class="n">regular_df</span><span class="p">[</span><span class="s1">&#39;Expected %&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="n">pct_error</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Expected&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Regular&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Regular&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">highend_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Highend&#39;</span><span class="p">,</span> <span class="s1">&#39;Highend % Alive&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">highend_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+    <span class="n">Expected</span><span class="o">=</span><span class="n">highend_df</span><span class="p">[</span><span class="s1">&#39;Expected %&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="n">pct_error</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Expected&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Highend&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Highend&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">regular_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Regular</th>
+      <th>Regular % Alive</th>
+      <th>Expected %</th>
+      <th>Expected</th>
+      <th>pct_error</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>631</td>
+      <td>0.631</td>
+      <td>0.626442</td>
+      <td>626.442220</td>
+      <td>0.722311</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>468</td>
+      <td>0.468</td>
+      <td>0.473924</td>
+      <td>473.924316</td>
+      <td>1.265880</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>382</td>
+      <td>0.382</td>
+      <td>0.388343</td>
+      <td>388.343023</td>
+      <td>1.660477</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>326</td>
+      <td>0.326</td>
+      <td>0.332611</td>
+      <td>332.611334</td>
+      <td>2.028016</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>289</td>
+      <td>0.289</td>
+      <td>0.293007</td>
+      <td>293.007468</td>
+      <td>1.386667</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>262</td>
+      <td>0.262</td>
+      <td>0.263196</td>
+      <td>263.196446</td>
+      <td>0.456659</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>241</td>
+      <td>0.241</td>
+      <td>0.239820</td>
+      <td>239.820330</td>
+      <td>0.489490</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>223</td>
+      <td>0.223</td>
+      <td>0.220921</td>
+      <td>220.921329</td>
+      <td>0.932139</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>207</td>
+      <td>0.207</td>
+      <td>0.205275</td>
+      <td>205.275288</td>
+      <td>0.833194</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>194</td>
+      <td>0.194</td>
+      <td>0.192075</td>
+      <td>192.074580</td>
+      <td>0.992484</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>183</td>
+      <td>0.183</td>
+      <td>0.180763</td>
+      <td>180.763232</td>
+      <td>1.222277</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>173</td>
+      <td>0.173</td>
+      <td>0.170945</td>
+      <td>170.945051</td>
+      <td>1.187832</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">highend_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Highend</th>
+      <th>Highend % Alive</th>
+      <th>Expected %</th>
+      <th>Expected</th>
+      <th>pct_error</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>869</td>
+      <td>0.869</td>
+      <td>0.849423</td>
+      <td>849.423112</td>
+      <td>2.252806</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>743</td>
+      <td>0.743</td>
+      <td>0.746224</td>
+      <td>746.224464</td>
+      <td>0.433979</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>653</td>
+      <td>0.653</td>
+      <td>0.670240</td>
+      <td>670.240217</td>
+      <td>2.640156</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>593</td>
+      <td>0.593</td>
+      <td>0.611502</td>
+      <td>611.501858</td>
+      <td>3.120043</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>551</td>
+      <td>0.551</td>
+      <td>0.564465</td>
+      <td>564.464815</td>
+      <td>2.443705</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>517</td>
+      <td>0.517</td>
+      <td>0.525777</td>
+      <td>525.777027</td>
+      <td>1.697684</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>491</td>
+      <td>0.491</td>
+      <td>0.493282</td>
+      <td>493.281708</td>
+      <td>0.464706</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>468</td>
+      <td>0.468</td>
+      <td>0.465522</td>
+      <td>465.522328</td>
+      <td>0.529417</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>445</td>
+      <td>0.445</td>
+      <td>0.441476</td>
+      <td>441.476428</td>
+      <td>0.791814</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>427</td>
+      <td>0.427</td>
+      <td>0.420403</td>
+      <td>420.403129</td>
+      <td>1.544935</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>409</td>
+      <td>0.409</td>
+      <td>0.401751</td>
+      <td>401.751200</td>
+      <td>1.772323</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>394</td>
+      <td>0.394</td>
+      <td>0.385101</td>
+      <td>385.101211</td>
+      <td>2.258576</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># in-sample, out-sample MAPE</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">regular_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;pct_error&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">regular_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">8</span><span class="p">:,</span> <span class="s1">&#39;pct_error&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1.1177048565522603, 1.0589469787072838)</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+   <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">regular_df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+       <span class="n">y</span><span class="o">=</span><span class="n">regular_df</span><span class="p">[</span><span class="s1">&#39;Regular&#39;</span><span class="p">],</span>
+       <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Actual&#39;</span>
+   <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+   <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">regular_df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+       <span class="n">y</span><span class="o">=</span><span class="n">regular_df</span><span class="p">[</span><span class="s1">&#39;Expected&#39;</span><span class="p">],</span>
+       <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Expected&#39;</span>
+   <span class="p">)</span>
+<span class="p">)</span>
+ 
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;7-Period Calibration for Regular Cohort&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Customers Remaining&#39;</span><span class="p">,</span>
+                  <span class="n">shapes</span><span class="o">=</span><span class="p">[</span>
+                      <span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Shape</span><span class="p">(</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span>
+                        <span class="n">x0</span><span class="o">=</span><span class="s1">&#39;7&#39;</span><span class="p">,</span>
+                        <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="n">x1</span><span class="o">=</span><span class="s1">&#39;7&#39;</span><span class="p">,</span>
+                        <span class="n">y1</span><span class="o">=</span><span class="mi">681</span><span class="p">,</span>
+                        <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;MediumPurple&quot;</span><span class="p">,</span>
+                            <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                            <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">,</span>
+                            <span class="p">))</span>
+                  <span class="p">]</span>
+                 <span class="p">)</span>
+    
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+        
+        
+            <div id="51338719-7606-465e-9e34-b9e0d627ce0f" class="plotly-graph-div" style="height:525px; width:100%;"></div>
+            <script type="text/javascript">
+                require(["plotly"], function(Plotly) {
+                    window.PLOTLYENV=window.PLOTLYENV || {};
+                    
+                if (document.getElementById("51338719-7606-465e-9e34-b9e0d627ce0f")) {
+                    Plotly.newPlot(
+                        '51338719-7606-465e-9e34-b9e0d627ce0f',
+                        [{"mode": "lines", "name": "Actual", "type": "scatter", "x": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "y": [631, 468, 382, 326, 289, 262, 241, 223, 207, 194, 183, 173]}, {"mode": "lines", "name": "Expected", "type": "scatter", "x": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "y": [626.4422202980988, 473.924316360677, 388.3430228516236, 332.61133373979357, 293.00746846337034, 263.1964461163194, 239.82033019558037, 220.9213291610359, 205.27528798797957, 192.07458007438493, 180.76323218973377, 170.94505113056724]}],
+                        {"shapes": [{"line": {"color": "MediumPurple", "dash": "dot", "width": 4}, "type": "line", "x0": "7", "x1": "7", "y0": 0, "y1": 681}], "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "zerolinecolor": "white", "zerolinewidth": 2}}}, "title": {"text": "7-Period Calibration for Regular Cohort"}, "xaxis": {"title": {"text": "Year"}}, "yaxis": {"title": {"text": "Customers Remaining"}}},
+                        {"responsive": true}
+                    ).then(function(){
+                            
+var gd = document.getElementById('51338719-7606-465e-9e34-b9e0d627ce0f');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })
+                };
+                });
+            </script>
+        </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+   <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">highend_df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+       <span class="n">y</span><span class="o">=</span><span class="n">highend_df</span><span class="p">[</span><span class="s1">&#39;Highend&#39;</span><span class="p">],</span>
+       <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Actual&#39;</span>
+   <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+   <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">highend_df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+       <span class="n">y</span><span class="o">=</span><span class="n">highend_df</span><span class="p">[</span><span class="s1">&#39;Expected&#39;</span><span class="p">],</span>
+       <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Expected&#39;</span>
+   <span class="p">)</span>
+<span class="p">)</span>
+ 
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;7-Period Calibration for Highend Cohort&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Customers Remaining&#39;</span><span class="p">,</span>
+                  <span class="n">shapes</span><span class="o">=</span><span class="p">[</span>
+                      <span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Shape</span><span class="p">(</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span>
+                        <span class="n">x0</span><span class="o">=</span><span class="s1">&#39;7&#39;</span><span class="p">,</span>
+                        <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="n">x1</span><span class="o">=</span><span class="s1">&#39;7&#39;</span><span class="p">,</span>
+                        <span class="n">y1</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span>
+                        <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;MediumPurple&quot;</span><span class="p">,</span>
+                            <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                            <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">,</span>
+                            <span class="p">))</span>
+                  <span class="p">]</span>
+                 <span class="p">)</span>
+    
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+        
+        
+            <div id="fbd959cf-23b9-4a18-9745-02d8cf6eeff9" class="plotly-graph-div" style="height:525px; width:100%;"></div>
+            <script type="text/javascript">
+                require(["plotly"], function(Plotly) {
+                    window.PLOTLYENV=window.PLOTLYENV || {};
+                    
+                if (document.getElementById("fbd959cf-23b9-4a18-9745-02d8cf6eeff9")) {
+                    Plotly.newPlot(
+                        'fbd959cf-23b9-4a18-9745-02d8cf6eeff9',
+                        [{"mode": "lines", "name": "Actual", "type": "scatter", "x": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "y": [869, 743, 653, 593, 551, 517, 491, 468, 445, 427, 409, 394]}, {"mode": "lines", "name": "Expected", "type": "scatter", "x": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "y": [849.4231115969762, 746.2244640355315, 670.2402167917236, 611.5018579178002, 564.4648152750004, 525.7770273588984, 493.281707659466, 465.52232841928566, 441.4764280520036, 420.4031294099044, 401.75120002763254, 385.1012113202649]}],
+                        {"shapes": [{"line": {"color": "MediumPurple", "dash": "dot", "width": 4}, "type": "line", "x0": "7", "x1": "7", "y0": 0, "y1": 900}], "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "zerolinecolor": "white", "zerolinewidth": 2}}}, "title": {"text": "7-Period Calibration for Highend Cohort"}, "xaxis": {"title": {"text": "Year"}}, "yaxis": {"title": {"text": "Customers Remaining"}}},
+                        {"responsive": true}
+                    ).then(function(){
+                            
+var gd = document.getElementById('fbd959cf-23b9-4a18-9745-02d8cf6eeff9');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })
+                };
+                });
+            </script>
+        </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

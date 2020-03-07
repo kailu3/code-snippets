@@ -1,0 +1,60 @@
+[LabApp | WARNING] No nbgrader_config.py file found (rerun with --debug to see where nbgrader is looking)
+[LabApp | INFO] Loading the validate_assignment nbgrader serverextension
+[LabApp | WARNING] JupyterLab server extension not enabled, manually loading...
+[LabApp | INFO] JupyterLab extension loaded from /Users/kailu/.pyenv/versions/3.6.5/lib/python3.6/site-packages/jupyterlab
+[LabApp | INFO] JupyterLab application directory is /Users/kailu/.pyenv/versions/3.6.5/share/jupyter/lab
+[LabApp | INFO] Serving notebooks from local directory: /Users/kailu/Desktop/Projects/code-snippets
+[LabApp | INFO] The Jupyter Notebook is running at:
+[LabApp | INFO] http://localhost:8889/?token=2d0d6d9b8c75dc910aa057a1c59bdb4bffc2a774c894010e
+[LabApp | INFO] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[LabApp | CRITICAL] 
+    
+    To access the notebook, open this file in a browser:
+        file:///Users/kailu/Library/Jupyter/runtime/nbserver-77757-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8889/?token=2d0d6d9b8c75dc910aa057a1c59bdb4bffc2a774c894010e
+[LabApp | WARNING] 404 GET /github?1583504892638 (::1) 50.80ms referer=http://localhost:8889/lab
+[LabApp | WARNING] The extension "jupyterlab-chart-editor" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-font-dejavu-sans-mono" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-fonts" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-font-anonymous-pro" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-font-fira-code" is outdated.
+    
+[LabApp | INFO] Build is up to date
+[LabApp | WARNING] 404 GET /api/contents/LR1.ipynb?content=0&1583504895075 (::1): No such file or directory: LR1.ipynb
+[LabApp | WARNING] No such file or directory: LR1.ipynb
+[LabApp | WARNING] 404 GET /api/contents/LR1.ipynb?content=0&1583504895075 (::1) 3.04ms referer=http://localhost:8889/lab
+[LabApp | WARNING] 404 GET /api/contents/COMPLETE%20-%2009.30-10.01%20Recitation.ipynb?content=0&1583504895074 (::1): No such file or directory: COMPLETE - 09.30-10.01 Recitation.ipynb
+[LabApp | WARNING] No such file or directory: COMPLETE - 09.30-10.01 Recitation.ipynb
+[LabApp | WARNING] 404 GET /api/contents/COMPLETE%20-%2009.30-10.01%20Recitation.ipynb?content=0&1583504895074 (::1) 4.04ms referer=http://localhost:8889/lab
+[LabApp | WARNING] 404 GET /api/contents/groupby-answers.ipynb?content=0&1583504895076 (::1): No such file or directory: groupby-answers.ipynb
+[LabApp | WARNING] No such file or directory: groupby-answers.ipynb
+[LabApp | WARNING] 404 GET /api/contents/groupby-answers.ipynb?content=0&1583504895076 (::1) 3.52ms referer=http://localhost:8889/lab
+[LabApp | WARNING] 404 GET /api/contents/groupby-empty.ipynb?content=0&1583504895078 (::1): No such file or directory: groupby-empty.ipynb
+[LabApp | WARNING] No such file or directory: groupby-empty.ipynb
+[LabApp | WARNING] 404 GET /api/contents/groupby-empty.ipynb?content=0&1583504895078 (::1) 3.97ms referer=http://localhost:8889/lab
+[LabApp | INFO] New terminal with automatic name: 1
+[LabApp | WARNING] 400 GET /api/contents/content/images/logo/favicon.ico?format=text&type=file&content=1&1583504978905 (::1): /Users/kailu/Desktop/Projects/code-snippets/content/images/logo/favicon.ico is not UTF-8 encoded
+[LabApp | WARNING] /Users/kailu/Desktop/Projects/code-snippets/content/images/logo/favicon.ico is not UTF-8 encoded
+[LabApp | WARNING] 400 GET /api/contents/content/images/logo/favicon.ico?format=text&type=file&content=1&1583504978905 (::1) 5.03ms referer=http://localhost:8889/lab
+[LabApp | INFO] interrupted
+[LabApp | CRITICAL] Shutdown confirmed
+[LabApp | INFO] Shutting down 0 kernels
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping
+[LabApp | CRITICAL] received signal 2, stopping

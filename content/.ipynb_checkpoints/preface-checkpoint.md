@@ -1,0 +1,2 @@
+This is a book compiling some useful code-snippets I've used over the past year of learning Python for data analysis. This is purely for the purpose of me being able to reuse code without having to open 20 million notebook to search for code.
+- Kai
