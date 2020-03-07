@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Barchart</title>
-  <meta name="description" content="        Barchart             ">
+  <meta name="description" content="        Barchart    When I want to compare a metric across categorical groups..    import numpy as npimport pandas as pdimport osfrom IPython.display import ...">
 
   <link rel="canonical" href="http://0.0.0.0:4000/code-snippets/plotly/barchart.html">
   <link rel="alternate" type="application/rss+xml" title="Code Snippets" href="http://0.0.0.0:4000/code-snippets/feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="http://0.0.0.0:4000/code-snippets/plotly/barchart.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Barchart" />
-<meta property="og:description" content="        Barchart             " />
+<meta property="og:description" content="        Barchart    When I want to compare a metric across categorical groups..    import numpy as npimport pandas as pdimport osfrom IPython.display import ..." />
 <meta property="og:image"       content="" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "http://0.0.0.0:4000/code-snippets/plotly/barchart.html",
   "headline": "Barchart",
-  "datePublished": "2020-03-06T18:34:02-06:00",
-  "dateModified": "2020-03-06T18:34:02-06:00",
-  "description": "        Barchart             ",
+  "datePublished": "2020-03-07T11:26:43-06:00",
+  "dateModified": "2020-03-07T11:26:43-06:00",
+  "description": "        Barchart    When I want to compare a metric across categorical groups..    import numpy as npimport pandas as pdimport osfrom IPython.display import ...",
   "author": {
     "@type": "Person",
     "name": "Kai Lu"
@@ -691,12 +691,12 @@ initFunction(initPrint)
             
             
 
-            <li class="c-sidebar__section" data-url="/plotly/other">
+            <li class="c-sidebar__section" data-url="/plotly/scatter">
               <a class="c-sidebar__entry"
-                href="/code-snippets/plotly/other.html"
+                href="/code-snippets/plotly/scatter.html"
               >
                 
-                Other
+                Scatterplot
               </a>
             </li>
             
@@ -773,7 +773,7 @@ initFunction(initPrint)
                 href="/code-snippets/wrangling/time.html"
               >
                 
-                Time Series
+                Time
               </a>
             </li>
             
@@ -850,7 +850,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/linear.html"
               >
                 
-                Linear Regression
+                Linear
               </a>
             </li>
             
@@ -869,7 +869,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/logistic.html"
               >
                 
-                Logistic Regression
+                Logistic
               </a>
             </li>
             
@@ -888,7 +888,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/forest.html"
               >
                 
-                Random Forest
+                Forest
               </a>
             </li>
             
@@ -1034,7 +1034,7 @@ initFunction(initPrint)
 
 
 
-<a href="https://mybinder.org/v2/gh/kailu3/code-snippets/master?filepath=content%2Fplotly%2Fbarchart.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/code-snippets/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
+<a href="https://mybinder.org/v2/gh/kailu3/code-snippets/master?urlpath=lab/tree/content%2Fplotly%2Fbarchart.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/code-snippets/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
   
 
 
@@ -1058,6 +1058,208 @@ initFunction(initPrint)
     <div id="page-info"><div id="page-title">Barchart</div>
 </div>
     
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>When I want to compare a metric across categorical groups..</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coronovirus</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/barchart-1.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Single-Bar">Single Bar<a class="anchor-link" href="#Single-Bar"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;1-week counts&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">coronovirus</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coronovirus</span><span class="p">[</span><span class="s1">&#39;actual&#39;</span><span class="p">])]</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../images/barchart-figure-1.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/plotly/barchart_5_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Grouped-Bar">Grouped Bar<a class="anchor-link" href="#Grouped-Bar"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Actual&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">coronovirus</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coronovirus</span><span class="p">[</span><span class="s1">&#39;actual&#39;</span><span class="p">]),</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Expected&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">coronovirus</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coronovirus</span><span class="p">[</span><span class="s1">&#39;forecast&#39;</span><span class="p">])</span>
+<span class="p">])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span>
+                 <span class="n">annotations</span><span class="o">=</span><span class="p">[</span>
+                    
+                      <span class="p">],</span>
+                  <span class="n">xaxis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                        <span class="n">tickmode</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span>
+                        <span class="n">tick0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="n">dtick</span> <span class="o">=</span> <span class="mi">1</span>
+                        <span class="p">)</span>
+                 <span class="p">)</span>
+
+<span class="c1"># Change the bar mode</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">barmode</span><span class="o">=</span><span class="s1">&#39;group&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">275</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../images/barchart-figure-2.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/plotly/barchart_8_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
  
 
 
@@ -1080,8 +1282,8 @@ initFunction(initPrint)
     
 
     
-    <a id="js-page__nav__next" class="c-page__nav__next" href="/code-snippets/plotly/other.html">
-      Other <span class="u-margin-right-tiny"></span> 〉
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/code-snippets/plotly/scatter.html">
+      Scatterplot <span class="u-margin-right-tiny"></span> 〉
     </a>
   
 </nav>

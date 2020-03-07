@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Line Graph</title>
-  <meta name="description" content="        Line Graph             ">
+  <meta name="description" content="        Line Graph    When I want to visualize some metric over time (sometimes even across different cohorts    import numpy as npimport pandas as pdimport ...">
 
   <link rel="canonical" href="http://0.0.0.0:4000/code-snippets/plotly/line.html">
   <link rel="alternate" type="application/rss+xml" title="Code Snippets" href="http://0.0.0.0:4000/code-snippets/feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="http://0.0.0.0:4000/code-snippets/plotly/line.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Line Graph" />
-<meta property="og:description" content="        Line Graph             " />
+<meta property="og:description" content="        Line Graph    When I want to visualize some metric over time (sometimes even across different cohorts    import numpy as npimport pandas as pdimport ..." />
 <meta property="og:image"       content="" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "http://0.0.0.0:4000/code-snippets/plotly/line.html",
   "headline": "Line Graph",
-  "datePublished": "2020-03-06T18:34:02-06:00",
-  "dateModified": "2020-03-06T18:34:02-06:00",
-  "description": "        Line Graph             ",
+  "datePublished": "2020-03-07T11:26:43-06:00",
+  "dateModified": "2020-03-07T11:26:43-06:00",
+  "description": "        Line Graph    When I want to visualize some metric over time (sometimes even across different cohorts    import numpy as npimport pandas as pdimport ...",
   "author": {
     "@type": "Person",
     "name": "Kai Lu"
@@ -691,12 +691,12 @@ initFunction(initPrint)
             
             
 
-            <li class="c-sidebar__section" data-url="/plotly/other">
+            <li class="c-sidebar__section" data-url="/plotly/scatter">
               <a class="c-sidebar__entry"
-                href="/code-snippets/plotly/other.html"
+                href="/code-snippets/plotly/scatter.html"
               >
                 
-                Other
+                Scatterplot
               </a>
             </li>
             
@@ -773,7 +773,7 @@ initFunction(initPrint)
                 href="/code-snippets/wrangling/time.html"
               >
                 
-                Time Series
+                Time
               </a>
             </li>
             
@@ -850,7 +850,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/linear.html"
               >
                 
-                Linear Regression
+                Linear
               </a>
             </li>
             
@@ -869,7 +869,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/logistic.html"
               >
                 
-                Logistic Regression
+                Logistic
               </a>
             </li>
             
@@ -888,7 +888,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/forest.html"
               >
                 
-                Random Forest
+                Forest
               </a>
             </li>
             
@@ -1034,7 +1034,7 @@ initFunction(initPrint)
 
 
 
-<a href="https://mybinder.org/v2/gh/kailu3/code-snippets/master?filepath=content%2Fplotly%2Fline.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/code-snippets/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
+<a href="https://mybinder.org/v2/gh/kailu3/code-snippets/master?urlpath=lab/tree/content%2Fplotly%2Fline.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/code-snippets/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
   
 
 
@@ -1058,6 +1058,343 @@ initFunction(initPrint)
     <div id="page-info"><div id="page-title">Line Graph</div>
 </div>
     
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>When I want to visualize some metric over time (sometimes even across different cohorts</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">control</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/line-graph-1.csv&#39;</span><span class="p">)</span>
+<span class="n">treatment</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/line-graph-2.csv&#39;</span><span class="p">)</span>
+<span class="n">engagement</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/line-graph-3.csv&#39;</span><span class="p">)</span>
+<span class="n">cohorts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/line-graph-4.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="One-Line">One Line<a class="anchor-link" href="#One-Line"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+   <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">engagement</span><span class="p">[</span><span class="s1">&#39;timestamp_day&#39;</span><span class="p">],</span>
+       <span class="n">y</span><span class="o">=</span><span class="n">engagement</span><span class="p">[</span><span class="s1">&#39;daily_engagement&#39;</span><span class="p">],</span>
+       <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+   <span class="p">)</span>
+<span class="p">)</span>
+ 
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Month&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Engagement&#39;</span><span class="p">,</span>
+                  <span class="n">annotations</span><span class="o">=</span><span class="p">[</span>
+                      <span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Annotation</span><span class="p">(</span>
+                            <span class="n">x</span><span class="o">=</span><span class="s1">&#39;2018-12-25&#39;</span><span class="p">,</span>
+                            <span class="n">y</span><span class="o">=</span><span class="mf">0.34</span><span class="p">,</span>
+                            <span class="n">xref</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+                            <span class="n">yref</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+                            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Christmas&quot;</span><span class="p">,</span>
+                            <span class="n">showarrow</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">arrowhead</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+                            <span class="n">ax</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                            <span class="n">ay</span><span class="o">=</span><span class="mi">60</span>
+                     <span class="p">),</span>
+                  <span class="p">]</span>
+                 <span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../images/line-figure-1.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/plotly/line_5_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Two-Lines">Two Lines<a class="anchor-link" href="#Two-Lines"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Plot the mean time per day per variant (control/treatment)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="c1"># Control</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">control</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">],</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">control</span><span class="p">[</span><span class="s1">&#39;mean_total_active_mins&#39;</span><span class="p">],</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;control&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Treatment</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">treatment</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">],</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">treatment</span><span class="p">[</span><span class="s1">&#39;mean_total_active_mins&#39;</span><span class="p">],</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;treatment&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Plot labels</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Minutes&#39;</span><span class="p">,</span>
+                  <span class="n">annotations</span><span class="o">=</span><span class="p">[</span>
+                      
+                  <span class="p">],</span>
+                 <span class="n">shapes</span><span class="o">=</span><span class="p">[</span>
+                     <span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Shape</span><span class="p">(</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span>
+                        <span class="n">x0</span><span class="o">=</span><span class="s1">&#39;2019-02-05&#39;</span><span class="p">,</span>
+                        <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="n">x1</span><span class="o">=</span><span class="s1">&#39;2019-02-05&#39;</span><span class="p">,</span>
+                        <span class="n">y1</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span>
+                        <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;MediumPurple&quot;</span><span class="p">,</span>
+                            <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                            <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">,</span>
+                            <span class="p">))])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">33</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../images/line-figure-2.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/plotly/line_8_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Multiple-Lines">Multiple Lines<a class="anchor-link" href="#Multiple-Lines"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">initial_cohorts</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s1">&#39;2018-11-05 00:00:00&#39;</span><span class="p">,</span>
+                   <span class="sa">u</span><span class="s1">&#39;2018-11-12 00:00:00&#39;</span><span class="p">,</span>
+                   <span class="sa">u</span><span class="s1">&#39;2018-11-19 00:00:00&#39;</span><span class="p">,</span>
+                   <span class="sa">u</span><span class="s1">&#39;2018-11-26 00:00:00&#39;</span><span class="p">,</span>
+                   <span class="sa">u</span><span class="s1">&#39;2018-12-03 00:00:00&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">cohort</span> <span class="ow">in</span> <span class="n">initial_cohorts</span><span class="p">:</span>
+    <span class="n">temp_category</span> <span class="o">=</span> <span class="n">cohorts</span><span class="p">[</span><span class="n">cohorts</span><span class="p">[</span><span class="s1">&#39;shop_cohort&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cohort</span><span class="p">]</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+        <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">temp_category</span><span class="p">[</span><span class="s1">&#39;timestamp_day&#39;</span><span class="p">],</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">temp_category</span><span class="p">[</span><span class="s1">&#39;daily_engagement&#39;</span><span class="p">],</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Cohort </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cohort</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">])))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Engagement&#39;</span><span class="p">,</span>
+                  <span class="n">annotations</span><span class="o">=</span><span class="p">[</span>                      
+                  <span class="p">])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="s1">&#39;line-figure-3.png&#39;</span><span class="p">)</span>
+
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../images/line-figure-3.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/plotly/line_11_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
  
 
 
@@ -1071,8 +1408,8 @@ initFunction(initPrint)
     
     
 
-    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/code-snippets/preface.html">
-      〈 <span class="u-margin-right-tiny"></span> Preface
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/code-snippets/plotly/Visualization.html">
+      〈 <span class="u-margin-right-tiny"></span> Visualization
     </a>
   
 

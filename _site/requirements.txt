@@ -7,4 +7,5 @@ folium
 matplotlib
 nbinteract
 scipy
+plotly
 jupyter-book

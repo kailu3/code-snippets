@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Histogram</title>
-  <meta name="description" content="        Histogram             ">
+  <meta name="description" content="        Histogram    When I want to graph the spread of a metric. Useful for visualizing bootstrapped results too.    import numpy as npimport pandas as pdim...">
 
   <link rel="canonical" href="http://0.0.0.0:4000/code-snippets/plotly/histogram.html">
   <link rel="alternate" type="application/rss+xml" title="Code Snippets" href="http://0.0.0.0:4000/code-snippets/feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="http://0.0.0.0:4000/code-snippets/plotly/histogram.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Histogram" />
-<meta property="og:description" content="        Histogram             " />
+<meta property="og:description" content="        Histogram    When I want to graph the spread of a metric. Useful for visualizing bootstrapped results too.    import numpy as npimport pandas as pdim..." />
 <meta property="og:image"       content="" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "http://0.0.0.0:4000/code-snippets/plotly/histogram.html",
   "headline": "Histogram",
-  "datePublished": "2020-03-06T18:34:02-06:00",
-  "dateModified": "2020-03-06T18:34:02-06:00",
-  "description": "        Histogram             ",
+  "datePublished": "2020-03-07T11:26:43-06:00",
+  "dateModified": "2020-03-07T11:26:43-06:00",
+  "description": "        Histogram    When I want to graph the spread of a metric. Useful for visualizing bootstrapped results too.    import numpy as npimport pandas as pdim...",
   "author": {
     "@type": "Person",
     "name": "Kai Lu"
@@ -691,12 +691,12 @@ initFunction(initPrint)
             
             
 
-            <li class="c-sidebar__section" data-url="/plotly/other">
+            <li class="c-sidebar__section" data-url="/plotly/scatter">
               <a class="c-sidebar__entry"
-                href="/code-snippets/plotly/other.html"
+                href="/code-snippets/plotly/scatter.html"
               >
                 
-                Other
+                Scatterplot
               </a>
             </li>
             
@@ -773,7 +773,7 @@ initFunction(initPrint)
                 href="/code-snippets/wrangling/time.html"
               >
                 
-                Time Series
+                Time
               </a>
             </li>
             
@@ -850,7 +850,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/linear.html"
               >
                 
-                Linear Regression
+                Linear
               </a>
             </li>
             
@@ -869,7 +869,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/logistic.html"
               >
                 
-                Logistic Regression
+                Logistic
               </a>
             </li>
             
@@ -888,7 +888,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/forest.html"
               >
                 
-                Random Forest
+                Forest
               </a>
             </li>
             
@@ -1034,7 +1034,7 @@ initFunction(initPrint)
 
 
 
-<a href="https://mybinder.org/v2/gh/kailu3/code-snippets/master?filepath=content%2Fplotly%2Fhistogram.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/code-snippets/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
+<a href="https://mybinder.org/v2/gh/kailu3/code-snippets/master?urlpath=lab/tree/content%2Fplotly%2Fhistogram.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/code-snippets/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
   
 
 
@@ -1058,6 +1058,261 @@ initFunction(initPrint)
     <div id="page-info"><div id="page-title">Histogram</div>
 </div>
     
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>When I want to graph the spread of a metric. Useful for visualizing bootstrapped results too.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">churn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/histogram-1.csv&#39;</span><span class="p">)</span>
+<span class="n">non_churn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/histogram-2.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="One-Histogram">One Histogram<a class="anchor-link" href="#One-Histogram"> </a></h2><blockquote><p>100k samples from a gamma distribution with parameters $r = 0.4$ and $\alpha = 0.3$</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alpha</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span>
+<span class="n">prior_dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">alpha</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">prior_dist</span><span class="p">,</span> <span class="n">histnorm</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">)])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;lambda&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span>
+                 <span class="n">annotations</span><span class="o">=</span><span class="p">[</span>
+                    
+                      <span class="p">],</span>
+                  <span class="n">xaxis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                        <span class="n">tickmode</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span><span class="p">,</span>
+                        <span class="n">tick0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="n">dtick</span> <span class="o">=</span> <span class="mi">1</span>
+                        <span class="p">),</span>
+                 <span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../images/histogram-figure-1.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/plotly/histogram_6_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Two-Histograms">Two Histograms<a class="anchor-link" href="#Two-Histograms"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Bootstrap</span>
+<span class="n">first_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">second_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">churn</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">churn</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;avg_distance&#39;</span><span class="p">])</span>
+    <span class="n">second</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">non_churn</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">non_churn</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;avg_distance&#39;</span><span class="p">])</span>
+    <span class="n">first_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">first</span><span class="p">)</span>
+    <span class="n">second_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">second</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">first_list</span><span class="p">,</span>
+                           <span class="n">histnorm</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">,</span>
+                           <span class="n">name</span><span class="o">=</span><span class="s1">&#39;churned&#39;</span><span class="p">,</span>
+                           <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#EB89B5&#39;</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">second_list</span><span class="p">,</span>
+                           <span class="n">histnorm</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">,</span>
+                           <span class="n">name</span><span class="o">=</span><span class="s1">&#39;non_churned&#39;</span><span class="p">,</span>
+                           <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#330C73&#39;</span><span class="p">))</span>
+
+<span class="c1"># Layout</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                  <span class="n">barmode</span><span class="o">=</span><span class="s1">&#39;overlay&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;avg_distance&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">opacity</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../images/histogram-figure-2.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/plotly/histogram_10_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
  
 
 

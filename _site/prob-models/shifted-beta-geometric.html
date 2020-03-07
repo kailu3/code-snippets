@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Shifted-beta-geometric</title>
-  <meta name="description" content="        Shifted-beta-geometric             ">
+  <meta name="description" content="        Shifted-beta-geometric    Probably want to write a Python package after 476 ends since I have idea how to use Excel. Here is an implementation of sBG...">
 
   <link rel="canonical" href="http://0.0.0.0:4000/code-snippets/prob-models/shifted-Beta-Geometric.html">
   <link rel="alternate" type="application/rss+xml" title="Code Snippets" href="http://0.0.0.0:4000/code-snippets/feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="http://0.0.0.0:4000/code-snippets/prob-models/shifted-Beta-Geometric.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Shifted-beta-geometric" />
-<meta property="og:description" content="        Shifted-beta-geometric             " />
+<meta property="og:description" content="        Shifted-beta-geometric    Probably want to write a Python package after 476 ends since I have idea how to use Excel. Here is an implementation of sBG..." />
 <meta property="og:image"       content="" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "http://0.0.0.0:4000/code-snippets/prob-models/shifted-Beta-Geometric.html",
   "headline": "Shifted-beta-geometric",
-  "datePublished": "2020-03-06T18:34:02-06:00",
-  "dateModified": "2020-03-06T18:34:02-06:00",
-  "description": "        Shifted-beta-geometric             ",
+  "datePublished": "2020-03-07T11:26:43-06:00",
+  "dateModified": "2020-03-07T11:26:43-06:00",
+  "description": "        Shifted-beta-geometric    Probably want to write a Python package after 476 ends since I have idea how to use Excel. Here is an implementation of sBG...",
   "author": {
     "@type": "Person",
     "name": "Kai Lu"
@@ -691,12 +691,12 @@ initFunction(initPrint)
             
             
 
-            <li class="c-sidebar__section" data-url="/plotly/other">
+            <li class="c-sidebar__section" data-url="/plotly/scatter">
               <a class="c-sidebar__entry"
-                href="/code-snippets/plotly/other.html"
+                href="/code-snippets/plotly/scatter.html"
               >
                 
-                Other
+                Scatterplot
               </a>
             </li>
             
@@ -773,7 +773,7 @@ initFunction(initPrint)
                 href="/code-snippets/wrangling/time.html"
               >
                 
-                Time Series
+                Time
               </a>
             </li>
             
@@ -850,7 +850,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/linear.html"
               >
                 
-                Linear Regression
+                Linear
               </a>
             </li>
             
@@ -869,7 +869,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/logistic.html"
               >
                 
-                Logistic Regression
+                Logistic
               </a>
             </li>
             
@@ -888,7 +888,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/forest.html"
               >
                 
-                Random Forest
+                Forest
               </a>
             </li>
             
@@ -1034,7 +1034,7 @@ initFunction(initPrint)
 
 
 
-<a href="https://mybinder.org/v2/gh/kailu3/code-snippets/master?filepath=content%2Fprob-models%2Fshifted-Beta-Geometric.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/code-snippets/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
+<a href="https://mybinder.org/v2/gh/kailu3/code-snippets/master?urlpath=lab/tree/content%2Fprob-models%2Fshifted-Beta-Geometric.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/code-snippets/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
   
 
 
@@ -1058,6 +1058,917 @@ initFunction(initPrint)
     <div id="page-info"><div id="page-title">Shifted-beta-geometric</div>
 </div>
     
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>Probably want to write a Python package after 476 ends since I have idea how to use Excel. Here is an implementation of sBG though, for modeling discrete-time, contractional behaviour. Wish I had more time to clean up this shit.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">minimize</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_probabilities</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Compute the probability of a random person churning for each time period&#39;&#39;&#39;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="n">alpha</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">num_periods</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">beta</span> <span class="o">+</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">+</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">p</span>
+
+
+<span class="k">def</span> <span class="nf">pct_dying</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Compute the number of people who churn for each time period&#39;&#39;&#39;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">n</span>
+
+
+<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Objective function that we need to maximize to get best alpha and beta parameters</span>
+<span class="sd">    **Computed log-likelihood will be 1/n smaller than the actual log-likelihood (n = original sample size)**</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">alpha</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">beta</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">99999</span>
+    <span class="n">probabilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">compute_probabilities</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+    <span class="n">percent_dying</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pct_dying</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)</span> <span class="o">*</span> <span class="n">percent_dying</span><span class="p">)</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">probabilities</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">maximize</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Maximize log-likelihood by searching for best (alpha, beta) combination&#39;&#39;&#39;</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="p">)</span> <span class="c1"># x is a tuple (alpha, beta)</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">])</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Nelder-Mead&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;xtol&#39;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="s1">&#39;disp&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+
+
+<span class="k">def</span> <span class="nf">forecast</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Forecast num_periods from the data using the sBG model&#39;&#39;&#39;</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">maximize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">probabilities</span> <span class="o">=</span> <span class="n">compute_probabilities</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">)</span>
+    
+    <span class="n">expected_alive</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">probabilities</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+        <span class="n">expected_alive</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">probabilities</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+    
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">expected_alive</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">forecast_dataframe</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Creates dataframe with forecast with additional performance columns&#39;&#39;&#39;</span>
+    <span class="n">forecast_column</span> <span class="o">=</span> <span class="n">forecast</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">num_periods</span><span class="p">)</span>
+    <span class="n">actual_column</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="n">period</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Period&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_periods</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))})</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Actual&#39;</span><span class="p">:</span> <span class="n">actual_column</span><span class="p">})</span>
+    <span class="n">the_forecast</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Forecast&#39;</span><span class="p">:</span> <span class="n">forecast_column</span><span class="p">})</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">period</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">the_forecast</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Compute pct error as well</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;pct_error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Actual&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Forecast&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Actual&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>   
+    
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Example">Example<a class="anchor-link" href="#Example"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/sBG-1.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Regular</th>
+      <th>Regular % Alive</th>
+      <th>Highend</th>
+      <th>Highend % Alive</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>631</td>
+      <td>0.631</td>
+      <td>869</td>
+      <td>0.869</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>468</td>
+      <td>0.468</td>
+      <td>743</td>
+      <td>0.743</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>382</td>
+      <td>0.382</td>
+      <td>653</td>
+      <td>0.653</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>326</td>
+      <td>0.326</td>
+      <td>593</td>
+      <td>0.593</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>289</td>
+      <td>0.289</td>
+      <td>551</td>
+      <td>0.551</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>262</td>
+      <td>0.262</td>
+      <td>517</td>
+      <td>0.517</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>241</td>
+      <td>0.241</td>
+      <td>491</td>
+      <td>0.491</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>223</td>
+      <td>0.223</td>
+      <td>468</td>
+      <td>0.468</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>207</td>
+      <td>0.207</td>
+      <td>445</td>
+      <td>0.445</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>194</td>
+      <td>0.194</td>
+      <td>427</td>
+      <td>0.427</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>183</td>
+      <td>0.183</td>
+      <td>409</td>
+      <td>0.409</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>173</td>
+      <td>0.173</td>
+      <td>394</td>
+      <td>0.394</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="7-Period-Calibration">7-Period Calibration<a class="anchor-link" href="#7-Period-Calibration"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get predictions on 12 periods using 7 periods of data for both segments</span>
+<span class="n">regular_series</span> <span class="o">=</span> <span class="n">forecast</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;Regular % Alive&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">highend_series</span> <span class="o">=</span> <span class="n">forecast</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;Highend % Alive&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span> <span class="mi">12</span><span class="p">)</span>
+
+<span class="n">regular_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Year&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+                           <span class="s1">&#39;Expected %&#39;</span><span class="p">:</span> <span class="n">regular_series</span>
+                          <span class="p">})</span>
+
+
+<span class="n">highend_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Year&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+                           <span class="s1">&#39;Expected %&#39;</span><span class="p">:</span> <span class="n">highend_series</span>
+                          <span class="p">})</span>
+
+<span class="n">regular_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Regular&#39;</span><span class="p">,</span> <span class="s1">&#39;Regular % Alive&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">regular_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+        <span class="n">Expected</span><span class="o">=</span><span class="n">regular_df</span><span class="p">[</span><span class="s1">&#39;Expected %&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+        <span class="n">pct_error</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Expected&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Regular&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Regular&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">highend_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Highend&#39;</span><span class="p">,</span> <span class="s1">&#39;Highend % Alive&#39;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">highend_df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+    <span class="n">Expected</span><span class="o">=</span><span class="n">highend_df</span><span class="p">[</span><span class="s1">&#39;Expected %&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="n">pct_error</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;Expected&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Highend&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;Highend&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">regular_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Regular</th>
+      <th>Regular % Alive</th>
+      <th>Expected %</th>
+      <th>Expected</th>
+      <th>pct_error</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>631</td>
+      <td>0.631</td>
+      <td>0.626442</td>
+      <td>626.442220</td>
+      <td>0.722311</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>468</td>
+      <td>0.468</td>
+      <td>0.473924</td>
+      <td>473.924316</td>
+      <td>1.265880</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>382</td>
+      <td>0.382</td>
+      <td>0.388343</td>
+      <td>388.343023</td>
+      <td>1.660477</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>326</td>
+      <td>0.326</td>
+      <td>0.332611</td>
+      <td>332.611334</td>
+      <td>2.028016</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>289</td>
+      <td>0.289</td>
+      <td>0.293007</td>
+      <td>293.007468</td>
+      <td>1.386667</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>262</td>
+      <td>0.262</td>
+      <td>0.263196</td>
+      <td>263.196446</td>
+      <td>0.456659</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>241</td>
+      <td>0.241</td>
+      <td>0.239820</td>
+      <td>239.820330</td>
+      <td>0.489490</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>223</td>
+      <td>0.223</td>
+      <td>0.220921</td>
+      <td>220.921329</td>
+      <td>0.932139</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>207</td>
+      <td>0.207</td>
+      <td>0.205275</td>
+      <td>205.275288</td>
+      <td>0.833194</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>194</td>
+      <td>0.194</td>
+      <td>0.192075</td>
+      <td>192.074580</td>
+      <td>0.992484</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>183</td>
+      <td>0.183</td>
+      <td>0.180763</td>
+      <td>180.763232</td>
+      <td>1.222277</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>173</td>
+      <td>0.173</td>
+      <td>0.170945</td>
+      <td>170.945051</td>
+      <td>1.187832</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">highend_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Highend</th>
+      <th>Highend % Alive</th>
+      <th>Expected %</th>
+      <th>Expected</th>
+      <th>pct_error</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>869</td>
+      <td>0.869</td>
+      <td>0.849423</td>
+      <td>849.423112</td>
+      <td>2.252806</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>743</td>
+      <td>0.743</td>
+      <td>0.746224</td>
+      <td>746.224464</td>
+      <td>0.433979</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>653</td>
+      <td>0.653</td>
+      <td>0.670240</td>
+      <td>670.240217</td>
+      <td>2.640156</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>593</td>
+      <td>0.593</td>
+      <td>0.611502</td>
+      <td>611.501858</td>
+      <td>3.120043</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>551</td>
+      <td>0.551</td>
+      <td>0.564465</td>
+      <td>564.464815</td>
+      <td>2.443705</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>517</td>
+      <td>0.517</td>
+      <td>0.525777</td>
+      <td>525.777027</td>
+      <td>1.697684</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>491</td>
+      <td>0.491</td>
+      <td>0.493282</td>
+      <td>493.281708</td>
+      <td>0.464706</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>468</td>
+      <td>0.468</td>
+      <td>0.465522</td>
+      <td>465.522328</td>
+      <td>0.529417</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>445</td>
+      <td>0.445</td>
+      <td>0.441476</td>
+      <td>441.476428</td>
+      <td>0.791814</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>427</td>
+      <td>0.427</td>
+      <td>0.420403</td>
+      <td>420.403129</td>
+      <td>1.544935</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>409</td>
+      <td>0.409</td>
+      <td>0.401751</td>
+      <td>401.751200</td>
+      <td>1.772323</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>394</td>
+      <td>0.394</td>
+      <td>0.385101</td>
+      <td>385.101211</td>
+      <td>2.258576</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># in-sample, out-sample MAPE</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">regular_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;pct_error&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">regular_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">8</span><span class="p">:,</span> <span class="s1">&#39;pct_error&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1.1177048565522603, 1.0589469787072838)</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+   <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">regular_df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+       <span class="n">y</span><span class="o">=</span><span class="n">regular_df</span><span class="p">[</span><span class="s1">&#39;Regular&#39;</span><span class="p">],</span>
+       <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Actual&#39;</span>
+   <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+   <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">regular_df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+       <span class="n">y</span><span class="o">=</span><span class="n">regular_df</span><span class="p">[</span><span class="s1">&#39;Expected&#39;</span><span class="p">],</span>
+       <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Expected&#39;</span>
+   <span class="p">)</span>
+<span class="p">)</span>
+ 
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;7-Period Calibration for Regular Cohort&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Customers Remaining&#39;</span><span class="p">,</span>
+                  <span class="n">shapes</span><span class="o">=</span><span class="p">[</span>
+                      <span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Shape</span><span class="p">(</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span>
+                        <span class="n">x0</span><span class="o">=</span><span class="s1">&#39;7&#39;</span><span class="p">,</span>
+                        <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="n">x1</span><span class="o">=</span><span class="s1">&#39;7&#39;</span><span class="p">,</span>
+                        <span class="n">y1</span><span class="o">=</span><span class="mi">681</span><span class="p">,</span>
+                        <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;MediumPurple&quot;</span><span class="p">,</span>
+                            <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                            <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">,</span>
+                            <span class="p">))</span>
+                  <span class="p">]</span>
+                 <span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../images/sBG-figure-1.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/prob-models/shifted-Beta-Geometric_12_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+   <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">highend_df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+       <span class="n">y</span><span class="o">=</span><span class="n">highend_df</span><span class="p">[</span><span class="s1">&#39;Highend&#39;</span><span class="p">],</span>
+       <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Actual&#39;</span>
+   <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+   <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">highend_df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span>
+       <span class="n">y</span><span class="o">=</span><span class="n">highend_df</span><span class="p">[</span><span class="s1">&#39;Expected&#39;</span><span class="p">],</span>
+       <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span>
+       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Expected&#39;</span>
+   <span class="p">)</span>
+<span class="p">)</span>
+ 
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;7-Period Calibration for Highend Cohort&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Customers Remaining&#39;</span><span class="p">,</span>
+                  <span class="n">shapes</span><span class="o">=</span><span class="p">[</span>
+                      <span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Shape</span><span class="p">(</span>
+                        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span>
+                        <span class="n">x0</span><span class="o">=</span><span class="s1">&#39;7&#39;</span><span class="p">,</span>
+                        <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="n">x1</span><span class="o">=</span><span class="s1">&#39;7&#39;</span><span class="p">,</span>
+                        <span class="n">y1</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span>
+                        <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;MediumPurple&quot;</span><span class="p">,</span>
+                            <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                            <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">,</span>
+                            <span class="p">))</span>
+                  <span class="p">]</span>
+                 <span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../images/sBG-figure-2.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/prob-models/shifted-Beta-Geometric_14_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
  
 
 

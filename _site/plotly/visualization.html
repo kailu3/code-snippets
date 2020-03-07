@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1">
 
   <title>Visualization</title>
-  <meta name="description" content="        Visualization             ">
+  <meta name="description" content="        Visualization    I mostly use plotly for visualization. It's pretty good for most things I want to graph. I usually use graph_objs for offline plotti...">
 
   <link rel="canonical" href="http://0.0.0.0:4000/code-snippets/plotly/Visualization.html">
   <link rel="alternate" type="application/rss+xml" title="Code Snippets" href="http://0.0.0.0:4000/code-snippets/feed.xml">
@@ -14,7 +14,7 @@
   <meta property="og:url"         content="http://0.0.0.0:4000/code-snippets/plotly/Visualization.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="Visualization" />
-<meta property="og:description" content="        Visualization             " />
+<meta property="og:description" content="        Visualization    I mostly use plotly for visualization. It's pretty good for most things I want to graph. I usually use graph_objs for offline plotti..." />
 <meta property="og:image"       content="" />
 
 <meta name="twitter:card" content="summary">
@@ -26,9 +26,9 @@
   "@type": "NewsArticle",
   "mainEntityOfPage": "http://0.0.0.0:4000/code-snippets/plotly/Visualization.html",
   "headline": "Visualization",
-  "datePublished": "2020-03-06T18:34:02-06:00",
-  "dateModified": "2020-03-06T18:34:02-06:00",
-  "description": "        Visualization             ",
+  "datePublished": "2020-03-07T11:26:43-06:00",
+  "dateModified": "2020-03-07T11:26:43-06:00",
+  "description": "        Visualization    I mostly use plotly for visualization. It's pretty good for most things I want to graph. I usually use graph_objs for offline plotti...",
   "author": {
     "@type": "Person",
     "name": "Kai Lu"
@@ -691,12 +691,12 @@ initFunction(initPrint)
             
             
 
-            <li class="c-sidebar__section" data-url="/plotly/other">
+            <li class="c-sidebar__section" data-url="/plotly/scatter">
               <a class="c-sidebar__entry"
-                href="/code-snippets/plotly/other.html"
+                href="/code-snippets/plotly/scatter.html"
               >
                 
-                Other
+                Scatterplot
               </a>
             </li>
             
@@ -773,7 +773,7 @@ initFunction(initPrint)
                 href="/code-snippets/wrangling/time.html"
               >
                 
-                Time Series
+                Time
               </a>
             </li>
             
@@ -850,7 +850,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/linear.html"
               >
                 
-                Linear Regression
+                Linear
               </a>
             </li>
             
@@ -869,7 +869,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/logistic.html"
               >
                 
-                Logistic Regression
+                Logistic
               </a>
             </li>
             
@@ -888,7 +888,7 @@ initFunction(initPrint)
                 href="/code-snippets/models/forest.html"
               >
                 
-                Random Forest
+                Forest
               </a>
             </li>
             
@@ -1034,7 +1034,7 @@ initFunction(initPrint)
 
 
 
-<a href="https://mybinder.org/v2/gh/kailu3/code-snippets/master?filepath=content%2Fplotly%2FVisualization.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/code-snippets/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
+<a href="https://mybinder.org/v2/gh/kailu3/code-snippets/master?urlpath=lab/tree/content%2Fplotly%2FVisualization.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/code-snippets/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
   
 
 
@@ -1058,6 +1058,95 @@ initFunction(initPrint)
     <div id="page-info"><div id="page-title">Visualization</div>
 </div>
     
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>I mostly use plotly for visualization. It's pretty good for most things I want to graph. I usually use <code>graph_objs</code> for offline plotting.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Since <code>Jupyter Book</code> does not currrently support <code>Plotly</code> graphs, I saved each plot as a <code>.png</code> file and read it in. The code to save a plotly visualization is as follows.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{name_of_image}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To display the image, just use the <code>IPython.display</code> library</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Image</span>
+
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../images/</span><span class="si">{name_of_image}</span><span class="s1">.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
  
 
 
