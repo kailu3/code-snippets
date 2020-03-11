@@ -34,6 +34,10 @@
     url: /plotly/barchart
   - title: Scatterplot
     url: /plotly/scatter
+  - title: Surface Plot
+    url: /plotly/surface
+  - title: Boxplot
+    url: /plotly/boxplot
 
 
 - title: Data Wrangling
