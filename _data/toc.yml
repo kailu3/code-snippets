@@ -72,8 +72,8 @@
   
 
 - title: Customer Lifetime Value
-- url: /clv/intro
+  url: /clv/intro
   not_numbered: true
   expand_sections: false
   sections:
-  - url: /clv/discrete-noncontractional
+  - url: /clv/discrete-contractional
