@@ -7,7 +7,7 @@ kernel_path: content/prob-models
 has_widgets: false
 title: |-
   Shifted-beta-geometric
-pagenum: 15
+pagenum: 17
 prev_page:
   url: /prob-models/intro.html
 next_page:
@@ -67,7 +67,7 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
     <span class="sd">&#39;&#39;&#39;Compute the probability of a random person churning for each time period&#39;&#39;&#39;</span>
     <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="n">alpha</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)]</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">num_periods</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">beta</span> <span class="o">+</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">+</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="n">t</span> <span class="o">-</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">beta</span><span class="o">+</span><span class="n">t</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span><span class="o">+</span><span class="n">beta</span><span class="o">+</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">p</span>
 
 

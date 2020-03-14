@@ -821,3 +821,285 @@
 [LabApp | INFO] Kernel shutdown: b6833333-7455-4546-bcff-6935029b2fa1
 [LabApp | INFO] Kernel shutdown: 276aba4d-9c4e-4818-b4c5-9664c24957fa
 [LabApp | INFO] Kernel shutdown: 9a4e3ca7-5c35-4ebe-ad2f-a938d7afffcf
+[LabApp | WARNING] No nbgrader_config.py file found (rerun with --debug to see where nbgrader is looking)
+[LabApp | INFO] Loading the validate_assignment nbgrader serverextension
+[LabApp | WARNING] JupyterLab server extension not enabled, manually loading...
+[LabApp | INFO] JupyterLab extension loaded from /Users/kailu/.pyenv/versions/3.6.5/lib/python3.6/site-packages/jupyterlab
+[LabApp | INFO] JupyterLab application directory is /Users/kailu/.pyenv/versions/3.6.5/share/jupyter/lab
+[LabApp | INFO] Serving notebooks from local directory: /Users/kailu/Desktop/Projects/code-snippets
+[LabApp | INFO] The Jupyter Notebook is running at:
+[LabApp | INFO] http://localhost:8888/?token=ec522e78493e7b5b83ca4b47875aa5e06f6b8d35e4ead6a6
+[LabApp | INFO] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[LabApp | CRITICAL] 
+    
+    To access the notebook, open this file in a browser:
+        file:///Users/kailu/Library/Jupyter/runtime/nbserver-3669-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/?token=ec522e78493e7b5b83ca4b47875aa5e06f6b8d35e4ead6a6
+[LabApp | WARNING] 404 GET /github?1584207173683 (::1) 57.85ms referer=http://localhost:8888/lab
+[LabApp | WARNING] The extension "jupyterlab-chart-editor" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-font-dejavu-sans-mono" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-fonts" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-font-anonymous-pro" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-font-fira-code" is outdated.
+    
+[LabApp | INFO] Build is up to date
+[LabApp | WARNING] 404 GET /api/contents/code-snippets/content/clv/Discrete-noncontractional.ipynb?content=0&1584207176535 (::1): No such file or directory: code-snippets/content/clv/Discrete-noncontractional.ipynb
+[LabApp | WARNING] No such file or directory: code-snippets/content/clv/Discrete-noncontractional.ipynb
+[LabApp | WARNING] 404 GET /api/contents/code-snippets/content/clv/Discrete-noncontractional.ipynb?content=0&1584207176535 (::1) 1.75ms referer=http://localhost:8888/lab
+[LabApp | WARNING] 404 GET /api/contents/code-snippets/content/prob-models?1584207176534 (::1): No such file or directory: code-snippets/content/prob-models
+[LabApp | WARNING] No such file or directory: code-snippets/content/prob-models
+[LabApp | WARNING] 404 GET /api/contents/code-snippets/content/prob-models?1584207176534 (::1) 2.13ms referer=http://localhost:8888/lab
+[LabApp | WARNING] 404 GET /api/contents/code-snippets/content/prob-models/shifted-Beta-Geometric.ipynb?content=0&1584207176538 (::1): No such file or directory: code-snippets/content/prob-models/shifted-Beta-Geometric.ipynb
+[LabApp | WARNING] No such file or directory: code-snippets/content/prob-models/shifted-Beta-Geometric.ipynb
+[LabApp | WARNING] 404 GET /api/contents/code-snippets/content/prob-models/shifted-Beta-Geometric.ipynb?content=0&1584207176538 (::1) 2.18ms referer=http://localhost:8888/lab
+[LabApp | INFO] Kernel started: 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Kernel started: cc9580d6-4a87-4a03-9a00-a1fb61d681da
+[LabApp | INFO] Adapting to protocol v5.1 for kernel cc9580d6-4a87-4a03-9a00-a1fb61d681da
+[LabApp | INFO] Kernel started: f93919ee-13a9-4aa6-a71f-7a315bec5ba7
+[LabApp | INFO] Adapting to protocol v5.1 for kernel f93919ee-13a9-4aa6-a71f-7a315bec5ba7
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Uploading file to /content/prob-models/discrete-noncontractional-figure-1.png
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/prob-models/shifted-Beta-Geometric.ipynb
+[LabApp | INFO] Saving shifted-Beta-Geometric.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Uploading file to /content/discrete-noncontractional-figure-2.png
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /content/clv/Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving Discrete-noncontractional.ipynb
+[LabApp | INFO] Saving file at /_data/toc.yml
+[LabApp | INFO] Saving file at /_data/toc.yml
