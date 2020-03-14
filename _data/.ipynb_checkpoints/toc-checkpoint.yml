@@ -70,10 +70,12 @@
   - url: /prob-models/Beta-Binomial
   - url: /prob-models/Burr-XII
   
+  
 
 - title: Customer Lifetime Value
   url: /clv/intro
   not_numbered: true
   expand_sections: false
   sections:
-  - url: /clv/discrete-contractional
+  - title: Discrete Contractional
+    url: /clv/discrete-contractional
