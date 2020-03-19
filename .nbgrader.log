@@ -1814,3 +1814,190 @@
 [LabApp | INFO] Saving BGBB-example.ipynb
 [LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
 [LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Starting buffering for 967722dd-2078-4043-ae1c-f50016ef2225:e5165e26-8c4c-4ad4-afb0-c3ee0f1548ea
+[LabApp | INFO] Starting buffering for 46be8069-b3f3-4eaf-a0ad-65b066ad0c81:8fafd8bd-51fb-4852-b149-41141095bd79
+[LabApp | INFO] Starting buffering for 2879034c-e4c4-40c7-b50b-9f5e33c39f75:f9c6249f-ee50-42cb-b34d-47dd1784963a
+[LabApp | INFO] Starting buffering for 361b0e41-ff19-4639-91b6-697aa890da94:7f123666-6b26-46a6-9ca4-7579b836e6bb
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 967722dd-2078-4043-ae1c-f50016ef2225
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 361b0e41-ff19-4639-91b6-697aa890da94
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 967722dd-2078-4043-ae1c-f50016ef2225
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 2879034c-e4c4-40c7-b50b-9f5e33c39f75
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 46be8069-b3f3-4eaf-a0ad-65b066ad0c81
+[LabApp | INFO] Restoring connection for 46be8069-b3f3-4eaf-a0ad-65b066ad0c81:8fafd8bd-51fb-4852-b149-41141095bd79
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 2879034c-e4c4-40c7-b50b-9f5e33c39f75
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 361b0e41-ff19-4639-91b6-697aa890da94
+[LabApp | INFO] Kernel started: 77060f6d-7721-407e-9e77-1ee1c131d9e7
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 77060f6d-7721-407e-9e77-1ee1c131d9e7
+[LabApp | INFO] Saving file at /content/wrangling/intro.ipynb
+[LabApp | INFO] Saving intro.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/intro.ipynb
+[LabApp | INFO] Saving intro.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/intro.ipynb
+[LabApp | INFO] Saving intro.ipynb
+[LabApp | INFO] Kernel started: 4505856f-f04b-4bed-99f6-ce6e1c774998
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4505856f-f04b-4bed-99f6-ce6e1c774998
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Creating new notebook in /content/wrangling
+[LabApp | INFO] Saving Untitled.ipynb
+[LabApp | INFO] Kernel started: 5043fcde-3092-4a9d-84da-0ad65e5103e7
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 5043fcde-3092-4a9d-84da-0ad65e5103e7
+[LabApp | INFO] Saving file at /content/wrangling/random.ipynb
+[LabApp | INFO] Saving random.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/random.ipynb
+[LabApp | INFO] Saving random.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/random.ipynb
+[LabApp | INFO] Saving random.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/random.ipynb
+[LabApp | INFO] Saving random.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/random.ipynb
+[LabApp | INFO] Saving random.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/random.ipynb
+[LabApp | INFO] Saving random.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/random.ipynb
+[LabApp | INFO] Saving random.ipynb
+[LabApp | INFO] Kernel started: a40ae54e-6a25-4b4e-93bc-3777aaf5fe74
+[LabApp | INFO] Adapting to protocol v5.1 for kernel a40ae54e-6a25-4b4e-93bc-3777aaf5fe74
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Kernel started: 74151e85-4154-4699-9ed5-508c0928a0c9
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 74151e85-4154-4699-9ed5-508c0928a0c9
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/tricks.ipynb
+[LabApp | INFO] Saving tricks.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/aggregation.ipynb
+[LabApp | INFO] Saving aggregation.ipynb
+[LabApp | INFO] Saving file at /content/wrangling/random.ipynb
+[LabApp | INFO] Saving random.ipynb
+[LabApp | INFO] Saving file at /_data/toc.yml

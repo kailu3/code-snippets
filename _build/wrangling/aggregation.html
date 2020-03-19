@@ -11,7 +11,7 @@ prev_page:
 next_page:
   url: /wrangling/time.html
 suffix: .ipynb
-search: 
+search: aggregation multiple named getting statistics per group operation new pandas usual access groups groupby object another actually think its just shorthand namedagg
 
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
@@ -20,6 +20,483 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
     <div id="page-info"><div id="page-title">Aggregation</div>
 </div>
     
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Named-Aggregation">Named Aggregation<a class="anchor-link" href="#Named-Aggregation"> </a></h2><blockquote><p>Getting multiple statistics per group operation, new in pandas 0.25</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bikes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/indego-trips.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span>
+    <span class="n">bikes</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;bike_id&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">min_duration</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;min&#39;</span><span class="p">),</span>
+        <span class="n">max_duration</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">),</span>
+        <span class="n">med_duration</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">),</span>
+        <span class="n">avg_duration</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">),</span>
+        <span class="n">total_trips</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">NamedAgg</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;trip_id&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bike_id</th>
+      <th>min_duration</th>
+      <th>max_duration</th>
+      <th>med_duration</th>
+      <th>avg_duration</th>
+      <th>total_trips</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>42</td>
+      <td>60</td>
+      <td>60</td>
+      <td>60.0</td>
+      <td>60.000000</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>44</td>
+      <td>33</td>
+      <td>844</td>
+      <td>76.0</td>
+      <td>317.666667</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>47</td>
+      <td>3</td>
+      <td>12</td>
+      <td>7.5</td>
+      <td>7.500000</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>102</td>
+      <td>3</td>
+      <td>55</td>
+      <td>10.0</td>
+      <td>12.921053</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>170</td>
+      <td>1</td>
+      <td>78</td>
+      <td>10.0</td>
+      <td>15.276316</td>
+      <td>76</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Usual-Aggregation">Usual Aggregation<a class="anchor-link" href="#Usual-Aggregation"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>We can access groups from a <code>groupby</code> object</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span>
+    <span class="n">bikes</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;start_station&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="mi">3020</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>trip_id</th>
+      <th>duration</th>
+      <th>start_time</th>
+      <th>end_time</th>
+      <th>start_station</th>
+      <th>start_lat</th>
+      <th>start_lon</th>
+      <th>end_station</th>
+      <th>end_lat</th>
+      <th>end_lon</th>
+      <th>bike_id</th>
+      <th>plan_duration</th>
+      <th>trip_route_category</th>
+      <th>passholder_type</th>
+      <th>bike_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>326702093</td>
+      <td>5</td>
+      <td>2019-10-01 00:07:03</td>
+      <td>2019-10-01 00:12:09</td>
+      <td>3020</td>
+      <td>39.949219</td>
+      <td>-75.190361</td>
+      <td>3163</td>
+      <td>39.949741</td>
+      <td>-75.180969</td>
+      <td>19707</td>
+      <td>365</td>
+      <td>One Way</td>
+      <td>Indego365</td>
+      <td>electric</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>326702057</td>
+      <td>1</td>
+      <td>2019-10-01 01:29:38</td>
+      <td>2019-10-01 01:30:09</td>
+      <td>3020</td>
+      <td>39.949219</td>
+      <td>-75.190361</td>
+      <td>3020</td>
+      <td>39.949219</td>
+      <td>-75.190361</td>
+      <td>2647</td>
+      <td>30</td>
+      <td>Round Trip</td>
+      <td>Indego30</td>
+      <td>standard</td>
+    </tr>
+    <tr>
+      <th>126</th>
+      <td>326701961</td>
+      <td>6</td>
+      <td>2019-10-01 06:05:17</td>
+      <td>2019-10-01 06:11:41</td>
+      <td>3020</td>
+      <td>39.949219</td>
+      <td>-75.190361</td>
+      <td>3170</td>
+      <td>39.944260</td>
+      <td>-75.181343</td>
+      <td>11788</td>
+      <td>30</td>
+      <td>One Way</td>
+      <td>Indego30</td>
+      <td>standard</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>326701941</td>
+      <td>5</td>
+      <td>2019-10-01 06:23:20</td>
+      <td>2019-10-01 06:28:19</td>
+      <td>3020</td>
+      <td>39.949219</td>
+      <td>-75.190361</td>
+      <td>3006</td>
+      <td>39.952202</td>
+      <td>-75.203110</td>
+      <td>14513</td>
+      <td>30</td>
+      <td>One Way</td>
+      <td>Indego30</td>
+      <td>standard</td>
+    </tr>
+    <tr>
+      <th>264</th>
+      <td>326701822</td>
+      <td>19</td>
+      <td>2019-10-01 07:21:12</td>
+      <td>2019-10-01 07:40:15</td>
+      <td>3020</td>
+      <td>39.949219</td>
+      <td>-75.190361</td>
+      <td>3158</td>
+      <td>39.925522</td>
+      <td>-75.169037</td>
+      <td>5345</td>
+      <td>30</td>
+      <td>One Way</td>
+      <td>Indego30</td>
+      <td>standard</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>Another way to do multiple aggregation. Actually, I think it's just shorthand NamedAgg</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span>
+    <span class="n">bikes</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;bike_id&#39;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">min_duration</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">),</span>
+        <span class="n">max_duration</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">),</span>
+        <span class="n">med_duration</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">),</span>
+        <span class="n">avg_duration</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">),</span>
+        <span class="n">total_trips</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;trip_id&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>min_duration</th>
+      <th>max_duration</th>
+      <th>med_duration</th>
+      <th>avg_duration</th>
+      <th>total_trips</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>60</td>
+      <td>60</td>
+      <td>60.0</td>
+      <td>60.000000</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>33</td>
+      <td>844</td>
+      <td>76.0</td>
+      <td>317.666667</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>12</td>
+      <td>7.5</td>
+      <td>7.500000</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>55</td>
+      <td>10.0</td>
+      <td>12.921053</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>78</td>
+      <td>10.0</td>
+      <td>15.276316</td>
+      <td>76</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
  
 
 

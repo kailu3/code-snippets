@@ -9,9 +9,9 @@ pagenum: 11
 prev_page:
   url: /wrangling/time.html
 next_page:
-  url: /models/intro.html
+  url: /wrangling/random.html
 suffix: .ipynb
-search: 
+search: also pandas list want create dataframe within column row item comma seperated assign explode new values string query easy read sql slices good chaining pass variables multiple conditions sometimes filter our using reverse easily skipping basics since just here pydata org docs stable reference api html columns variable names f strings prob cleaner format set caption lol
 
 comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
 ---
@@ -20,6 +20,865 @@ comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /con
     <div id="page-info"><div id="page-title">Tricks</div>
 </div>
     
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Explode">Explode<a class="anchor-link" href="#Explode"> </a></h2><blockquote><p>also new for pandas 0.25</p>
+</blockquote>
+<h3 id="List">List<a class="anchor-link" href="#List"> </a></h3><p>If have a list within a column and you want to create a row for each item in that list.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;article&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="p">[[</span><span class="s1">&#39;happy&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;sad&#39;</span><span class="p">,</span> <span class="s1">&#39;frustrating&#39;</span><span class="p">,</span> <span class="s1">&#39;stressful&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;ಠ_ಠ&#39;</span><span class="p">]],</span>
+    <span class="s1">&#39;views&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>article</th>
+      <th>tags</th>
+      <th>views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>[happy, fun]</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>[sad, frustrating, stressful]</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>[ಠ_ಠ]</td>
+      <td>10000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>article</th>
+      <th>tags</th>
+      <th>views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>happy</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>fun</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>sad</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>frustrating</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>stressful</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>ಠ_ಠ</td>
+      <td>10000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Comma-seperated">Comma-seperated<a class="anchor-link" href="#Comma-seperated"> </a></h3><p>If have comma seperated values within a column and you want to create a row for each item in the string</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;article&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;happy,fun&#39;</span><span class="p">,</span> <span class="s1">&#39;sad,frustrating,stressful&#39;</span><span class="p">,</span> <span class="s1">&#39;ಠ_ಠ&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;views&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>article</th>
+      <th>tags</th>
+      <th>views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>happy,fun</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>sad,frustrating,stressful</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>ಠ_ಠ</td>
+      <td>10000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>article</th>
+      <th>tags</th>
+      <th>views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>happy</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>fun</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>sad</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>frustrating</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>stressful</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>ಠ_ಠ</td>
+      <td>10000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Query">Query<a class="anchor-link" href="#Query"> </a></h2><blockquote><p>for easy to read sql-like slices, good for chaining</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;views &gt; 10 &amp; views &lt; 10000&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>article</th>
+      <th>tags</th>
+      <th>views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>happy,fun</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>can also pass variables with @</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">threshold</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;views == @threshold&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>article</th>
+      <th>tags</th>
+      <th>views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>happy,fun</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Multiple-Conditions">Multiple Conditions<a class="anchor-link" href="#Multiple-Conditions"> </a></h2><blockquote><p>Sometimes we want to filter our dataframe using a list</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">some_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">article</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">some_list</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>article</th>
+      <th>tags</th>
+      <th>views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>happy,fun</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>sad,frustrating,stressful</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>we can reverse this easily with ~</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">article</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">some_list</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>article</th>
+      <th>tags</th>
+      <th>views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>ಠ_ಠ</td>
+      <td>10000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Assign">Assign<a class="anchor-link" href="#Assign"> </a></h2><p>Skipping basics since you can just look here: <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.assign.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.assign.html</a></p>
+<blockquote><p>Create columns with variable names, also f strings (prob cleaner to use than <code>{}.format()</code></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">col_name</span> <span class="o">=</span> <span class="s1">&#39;cat&#39;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+        <span class="o">**</span><span class="p">{</span><span class="n">f</span><span class="s1">&#39;some_</span><span class="si">{col_name}</span><span class="s1">&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;haku&#39;</span><span class="p">,</span> <span class="s1">&#39;nagi&#39;</span><span class="p">,</span> <span class="s1">&#39;poki&#39;</span><span class="p">]}</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s2">&quot;some random dataframe I imagined&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<style  type="text/css" >
+</style><table id="T_4394760a_6a15_11ea_b577_f40f2422f04a" ><caption>some random dataframe I imagined</caption><thead>    <tr>        <th class="blank level0" ></th>        <th class="col_heading level0 col0" >article</th>        <th class="col_heading level0 col1" >tags</th>        <th class="col_heading level0 col2" >views</th>        <th class="col_heading level0 col3" >some_cat</th>    </tr></thead><tbody>
+                <tr>
+                        <th id="T_4394760a_6a15_11ea_b577_f40f2422f04alevel0_row0" class="row_heading level0 row0" >0</th>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow0_col0" class="data row0 col0" >a</td>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow0_col1" class="data row0 col1" >happy,fun</td>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow0_col2" class="data row0 col2" >100</td>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow0_col3" class="data row0 col3" >haku</td>
+            </tr>
+            <tr>
+                        <th id="T_4394760a_6a15_11ea_b577_f40f2422f04alevel0_row1" class="row_heading level0 row1" >1</th>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow1_col0" class="data row1 col0" >b</td>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow1_col1" class="data row1 col1" >sad,frustrating,stressful</td>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow1_col2" class="data row1 col2" >10</td>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow1_col3" class="data row1 col3" >nagi</td>
+            </tr>
+            <tr>
+                        <th id="T_4394760a_6a15_11ea_b577_f40f2422f04alevel0_row2" class="row_heading level0 row2" >2</th>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow2_col0" class="data row2 col0" >c</td>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow2_col1" class="data row2 col1" >ಠ_ಠ</td>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow2_col2" class="data row2 col2" >10000</td>
+                        <td id="T_4394760a_6a15_11ea_b577_f40f2422f04arow2_col3" class="data row2 col3" >poki</td>
+            </tr>
+    </tbody></table>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>can also set a caption for the dataframe lol</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
  
 
 
