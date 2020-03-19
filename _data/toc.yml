@@ -77,5 +77,9 @@
   not_numbered: true
   expand_sections: false
   sections:
-  - title: Discrete Contractional
-    url: /clv/discrete-contractional
+  - title: Discrete Contractual
+    url: /clv/discrete-contractual
+  - title: Discrete Non-Contractual
+    url: /clv/discrete-noncontractual
+  - title: BGBB example
+    url: /clv/BGBB-example

@@ -1,0 +1,1652 @@
+---
+interact_link: content/clv/discrete-noncontractual.ipynb
+kernel_name: python3
+kernel_path: content/clv
+has_widgets: false
+title: |-
+  Discrete Non-Contractual
+pagenum: 23
+prev_page:
+  url: /clv/discrete-contractual.html
+next_page:
+  url: /clv/BGBB-example.html
+suffix: .ipynb
+search: x matches n column bgbb csv brucehardie com notes expected e discrete noncontractual business settings functions donation data parameter estimation probability alive t given frequency recency slide lecture count mean sample fit p tracking plots cumulative annual conditional expectation future transactions across next transaction opportunities customer purchase history tx ce
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    <div id="page-info"><div id="page-title">Discrete Non-Contractual</div>
+</div>
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>For discrete, noncontractual business settings</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">minimize</span>
+<span class="kn">import</span> <span class="nn">scipy.special</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Functions">Functions<a class="anchor-link" href="#Functions"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;TODO: Shapes transactional data into recency and frequency&#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">i_likelihood</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t_x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculates the individual likelihood for a person</span>
+<span class="sd">    given paramters, frequency, recency, and periods</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Summation component</span>
+    <span class="n">summation</span> <span class="o">=</span> <span class="p">[</span><span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="o">+</span><span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="o">+</span><span class="n">t_x</span><span class="o">-</span><span class="n">x</span><span class="o">+</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+                 <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">delta</span><span class="o">+</span><span class="n">t_x</span><span class="o">+</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span> 
+                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">t_x</span><span class="p">)]</span>
+    
+    <span class="c1"># First component</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="o">+</span><span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="o">+</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">summation</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Computes total log-likelihood for given parameters&#39;&#39;&#39;</span>
+    <span class="c1"># Get frequency, recency, and periods lists</span>
+    <span class="n">frequency</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">frequency</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">recency</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">recency</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">periods</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">periods</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    
+    <span class="c1"># Compute individual likelihood first</span>
+    <span class="n">indiv_llist</span> <span class="o">=</span> <span class="p">[</span><span class="n">i_likelihood</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">frequency</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">recency</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">periods</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+                   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">frequency</span><span class="p">))]</span>
+    
+    <span class="c1"># Multiply with num_obs</span>
+    <span class="n">num_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">num_obs</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">num_obs</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">indiv_llist</span><span class="p">)))</span>
+
+
+<span class="k">def</span> <span class="nf">maximize</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Maximize log-likelihood by searching for best </span>
+<span class="sd">    (alpha, beta, gamma, delta) combination&#39;&#39;&#39;</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Nelder-Mead&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;xtol&#39;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="s1">&#39;disp&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+
+
+<span class="k">def</span> <span class="nf">prob_alive</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t_x</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Probability for a customer with transaction</span>
+<span class="sd">    history (x, t_x, n) to be alive at time period p&#39;&#39;&#39;</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">maximize</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">periods</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">indiv_ll</span> <span class="o">=</span> <span class="n">i_likelihood</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t_x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="o">+</span><span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="o">+</span><span class="n">p</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+            <span class="o">/</span> <span class="n">indiv_ll</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">prob_alive_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;List of probabilities for a customer to be alive</span>
+<span class="sd">    for all the combinations of (x, t_x)&#39;&#39;&#39;</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">maximize</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">periods</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="n">x_list</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">frequency</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">t_x_list</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">recency</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    
+    <span class="n">p_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="o">+</span><span class="n">x_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">beta</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">x_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+               <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+               <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="o">+</span><span class="n">p</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+               <span class="o">/</span> <span class="n">i_likelihood</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">x_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">t_x_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span> 
+               <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_list</span><span class="p">))]</span>
+    
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;frequency&#39;</span><span class="p">:</span> <span class="n">x_list</span><span class="p">,</span>
+                         <span class="s1">&#39;recency&#39;</span><span class="p">:</span> <span class="n">t_x_list</span><span class="p">,</span>
+                         <span class="s1">&#39;p_alive&#39;</span><span class="p">:</span> <span class="n">p_list</span><span class="p">})</span>
+
+<span class="k">def</span> <span class="nf">expected_count</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Calculates the mean number of transactions</span>
+<span class="sd">    occurring across the first n transaction opportunities</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">maximize</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">E_x</span> <span class="o">=</span> <span class="p">[</span><span class="n">alpha</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span><span class="o">+</span><span class="n">beta</span><span class="p">)</span> 
+           <span class="o">*</span> <span class="n">delta</span> <span class="o">/</span> <span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+           <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="n">delta</span><span class="p">)</span><span class="o">/</span><span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="n">delta</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+           <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">delta</span><span class="o">+</span><span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">delta</span><span class="p">))</span>
+           <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+                         <span class="s1">&#39;E[X(n)]&#39;</span><span class="p">:</span> <span class="n">E_x</span><span class="p">,</span>
+                        <span class="p">})</span>
+
+<span class="k">def</span> <span class="nf">pmf</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;probabilility of having x transactions in the dataset</span>
+<span class="sd">    (essentially the pmf)&#39;&#39;&#39;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">periods</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Summation component</span>
+    <span class="n">summation</span> <span class="o">=</span> <span class="p">[</span><span class="n">sc</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+                 <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="o">+</span><span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="o">+</span><span class="n">t_x</span><span class="o">-</span><span class="n">x</span><span class="o">+</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+                 <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">delta</span><span class="o">+</span><span class="n">t_x</span><span class="o">+</span><span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span> 
+                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">t_x</span><span class="p">)]</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="o">+</span><span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="o">+</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+            <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">summation</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">pmf_df</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Creates a dataframe for all possible x&#39;s</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">maximize</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">p_x</span> <span class="o">=</span> <span class="p">[</span><span class="n">pmf</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+           <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">periods</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">periods</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span>
+                         <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="n">p_x</span><span class="p">})</span>
+
+
+<span class="k">def</span> <span class="nf">cond_expectations</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t_x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;The expected number of future transactions</span>
+<span class="sd">    across the next p transaction opportunities by</span>
+<span class="sd">    a customer with purchase history (x, t_x, n)&#39;&#39;&#39;</span>    
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">i_likelihood</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t_x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="o">+</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">beta</span><span class="o">+</span><span class="n">n</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">delta</span><span class="o">/</span><span class="p">(</span><span class="n">gamma</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="n">delta</span><span class="p">)</span><span class="o">/</span><span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">delta</span><span class="p">)</span>
+            <span class="o">*</span> <span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">delta</span><span class="o">+</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="n">delta</span><span class="o">+</span><span class="n">n</span><span class="p">)</span>
+             <span class="o">-</span> <span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">delta</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">gamma</span><span class="o">+</span><span class="n">delta</span><span class="o">+</span><span class="n">n</span><span class="o">+</span><span class="n">p</span><span class="p">))</span>
+           <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">cond_expectations_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Creates a dataframe for CE for each</span>
+<span class="sd">    (x, t_x, n) combination&#39;&#39;&#39;</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">maximize</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">x_list</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">frequency</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">t_x_list</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">recency</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">n_list</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">periods</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    
+    <span class="n">ce_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">cond_expectations</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span>
+                                 <span class="n">x_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">t_x_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">n_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
+               <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_list</span><span class="p">))]</span>
+    
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;frequency&#39;</span><span class="p">:</span> <span class="n">x_list</span><span class="p">,</span>
+                         <span class="s1">&#39;recency&#39;</span><span class="p">:</span> <span class="n">t_x_list</span><span class="p">,</span>
+                         <span class="s1">&#39;n&#39;</span><span class="p">:</span> <span class="n">n_list</span><span class="p">,</span>
+                         <span class="s1">&#39;ce&#39;</span><span class="p">:</span> <span class="n">ce_list</span><span class="p">})</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Donation-Data">Donation Data<a class="anchor-link" href="#Donation-Data"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/discrete-noncontractual.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>frequency</th>
+      <th>recency</th>
+      <th>periods</th>
+      <th>num_obs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>6</td>
+      <td>6</td>
+      <td>1203</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>6</td>
+      <td>6</td>
+      <td>728</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>6</td>
+      <td>6</td>
+      <td>512</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>6</td>
+      <td>6</td>
+      <td>357</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>6</td>
+      <td>6</td>
+      <td>234</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Parameter-Estimation">Parameter Estimation<a class="anchor-link" href="#Parameter-Estimation"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">maximize</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">delta</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1.2035222635537741,
+ 0.7497163225424901,
+ 0.6567182476391347,
+ 2.7834424466811885)</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Probability-Alive-at-$t-=-6$-given-frequency-and-recency">Probability Alive at $t = 6$ given frequency and recency<a class="anchor-link" href="#Probability-Alive-at-$t-=-6$-given-frequency-and-recency"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prob_alive_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>frequency</th>
+      <th>recency</th>
+      <th>p_alive</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>6</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>6</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>6</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>6</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>6</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>6</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>5</td>
+      <td>5</td>
+      <td>0.561002</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>4</td>
+      <td>5</td>
+      <td>0.748898</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>3</td>
+      <td>5</td>
+      <td>0.824160</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2</td>
+      <td>5</td>
+      <td>0.864710</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>5</td>
+      <td>0.890062</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>4</td>
+      <td>4</td>
+      <td>0.215146</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>3</td>
+      <td>4</td>
+      <td>0.472461</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2</td>
+      <td>4</td>
+      <td>0.633745</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1</td>
+      <td>4</td>
+      <td>0.731255</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>3</td>
+      <td>3</td>
+      <td>0.102110</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2</td>
+      <td>3</td>
+      <td>0.321252</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>1</td>
+      <td>3</td>
+      <td>0.517346</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2</td>
+      <td>2</td>
+      <td>0.071380</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>1</td>
+      <td>2</td>
+      <td>0.273754</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0.074655</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0.116218</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>Matches with slide 76 of Lecture 7</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Expected-count/mean---E[X(n)]">Expected count/mean - E[X(n)]<a class="anchor-link" href="#Expected-count/mean---E[X(n)]"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">expected_count</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n</th>
+      <th>E[X(n)]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.498543</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0.923349</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1.296874</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1.632310</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1.938137</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>2.220169</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>2.482581</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>2.728487</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>2.960276</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>3.179829</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>3.388654</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>Matches E[X(n)] column in <code>BGBB_2011-01-20.csv</code> from <a href="http://brucehardie.com/notes/010/">http://brucehardie.com/notes/010/</a></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="In-Sample-Fit">In-Sample Fit<a class="anchor-link" href="#In-Sample-Fit"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">count_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/discrete-noncontractual-3.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">count_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">count_df</span>
+    <span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pmf_df</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+        <span class="n">Model</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">11104</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">count_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>Actual</th>
+      <th>p</th>
+      <th>Model</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3464</td>
+      <td>0.311139</td>
+      <td>3454.882039</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1823</td>
+      <td>0.170088</td>
+      <td>1888.654379</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>1430</td>
+      <td>0.121477</td>
+      <td>1348.882342</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>1085</td>
+      <td>0.100268</td>
+      <td>1113.378523</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>1036</td>
+      <td>0.091672</td>
+      <td>1017.922384</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>1063</td>
+      <td>0.092504</td>
+      <td>1027.166008</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>1203</td>
+      <td>0.112853</td>
+      <td>1253.114324</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>Matches up with P(X(n)=x) column in <code>BGBB_2011-01-20.csv</code> from <a href="http://brucehardie.com/notes/010/">http://brucehardie.com/notes/010/</a></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../images/discrete-noncontractual-figure-1.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/clv/discrete-noncontractual_19_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tracking-Plots">Tracking Plots<a class="anchor-link" href="#Tracking-Plots"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">incr_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/discrete-noncontractual-2.csv&#39;</span><span class="p">)</span>
+<span class="c1"># Add a cumulative sum column</span>
+<span class="n">incr_df</span><span class="p">[</span><span class="s1">&#39;cumulative&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">incr_df</span><span class="p">[</span><span class="s1">&#39;Actual&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="n">incr_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Actual</th>
+      <th>cumulative</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1996</td>
+      <td>5652</td>
+      <td>5652</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1997</td>
+      <td>4674</td>
+      <td>10326</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1998</td>
+      <td>4019</td>
+      <td>14345</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1999</td>
+      <td>3552</td>
+      <td>17897</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2000</td>
+      <td>3555</td>
+      <td>21452</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2001</td>
+      <td>3163</td>
+      <td>24615</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2002</td>
+      <td>3110</td>
+      <td>27725</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2003</td>
+      <td>2938</td>
+      <td>30663</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2004</td>
+      <td>2703</td>
+      <td>33366</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2005</td>
+      <td>2573</td>
+      <td>35939</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2006</td>
+      <td>1936</td>
+      <td>37875</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">expected_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">expected_count</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">assign</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;E[X(n)]&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">11104</span><span class="p">,</span>
+        <span class="n">Year</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1996</span><span class="p">,</span> <span class="mi">2007</span><span class="p">),</span>
+        <span class="n">annual</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">expected_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;annual&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expected_df</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">expected_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n</th>
+      <th>E[X(n)]</th>
+      <th>model</th>
+      <th>Year</th>
+      <th>annual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.498543</td>
+      <td>5535.817992</td>
+      <td>1996</td>
+      <td>5535.817992</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0.923349</td>
+      <td>10252.865461</td>
+      <td>1997</td>
+      <td>4717.047470</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1.296874</td>
+      <td>14400.486526</td>
+      <td>1998</td>
+      <td>4147.621064</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1.632310</td>
+      <td>18125.164970</td>
+      <td>1999</td>
+      <td>3724.678444</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1.938137</td>
+      <td>21521.078432</td>
+      <td>2000</td>
+      <td>3395.913462</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>2.220169</td>
+      <td>24652.760154</td>
+      <td>2001</td>
+      <td>3131.681723</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>2.482581</td>
+      <td>27566.581970</td>
+      <td>2002</td>
+      <td>2913.821815</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>2.728487</td>
+      <td>30297.115423</td>
+      <td>2003</td>
+      <td>2730.533453</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>2.960276</td>
+      <td>32870.903600</td>
+      <td>2004</td>
+      <td>2573.788177</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>3.179829</td>
+      <td>35308.821051</td>
+      <td>2005</td>
+      <td>2437.917451</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>3.388654</td>
+      <td>37627.616052</td>
+      <td>2006</td>
+      <td>2318.795001</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cumulative">Cumulative<a class="anchor-link" href="#Cumulative"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;../images/discrete-noncontractual-figure-2.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/clv/discrete-noncontractual_24_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;../images/discrete-noncontractual-figure-4.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/clv/discrete-noncontractual_25_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Annual">Annual<a class="anchor-link" href="#Annual"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;../images/discrete-noncontractual-figure-3.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/clv/discrete-noncontractual_27_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;../images/discrete-noncontractual-figure-5.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea output_execute_result">
+<img src="../images/clv/discrete-noncontractual_28_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conditional-Expectation">Conditional Expectation<a class="anchor-link" href="#Conditional-Expectation"> </a></h2><p>The expected number of future transactions across the next 5 transaction opportunities by a customer with purchase history (x, t_x, n)</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cond_expectations_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>frequency</th>
+      <th>recency</th>
+      <th>n</th>
+      <th>ce</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>6</td>
+      <td>6</td>
+      <td>3.752544</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5</td>
+      <td>6</td>
+      <td>6</td>
+      <td>3.231612</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>6</td>
+      <td>6</td>
+      <td>2.710681</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>6</td>
+      <td>6</td>
+      <td>2.189749</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>6</td>
+      <td>6</td>
+      <td>1.668817</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>6</td>
+      <td>6</td>
+      <td>1.147885</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>5</td>
+      <td>5</td>
+      <td>6</td>
+      <td>1.812942</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>2.030024</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>3</td>
+      <td>5</td>
+      <td>6</td>
+      <td>1.804703</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2</td>
+      <td>5</td>
+      <td>6</td>
+      <td>1.443042</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>5</td>
+      <td>6</td>
+      <td>1.021689</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>4</td>
+      <td>4</td>
+      <td>6</td>
+      <td>0.583192</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>3</td>
+      <td>4</td>
+      <td>6</td>
+      <td>1.034572</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2</td>
+      <td>4</td>
+      <td>6</td>
+      <td>1.057603</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>1</td>
+      <td>4</td>
+      <td>6</td>
+      <td>0.839396</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>3</td>
+      <td>3</td>
+      <td>6</td>
+      <td>0.223595</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2</td>
+      <td>3</td>
+      <td>6</td>
+      <td>0.536111</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>1</td>
+      <td>3</td>
+      <td>6</td>
+      <td>0.593853</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2</td>
+      <td>2</td>
+      <td>6</td>
+      <td>0.119121</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>1</td>
+      <td>2</td>
+      <td>6</td>
+      <td>0.314238</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>1</td>
+      <td>1</td>
+      <td>6</td>
+      <td>0.085696</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0.072863</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>Matches up with CE column in <code>BGBB_2011-01-20.csv</code> from <a href="http://brucehardie.com/notes/010/">http://brucehardie.com/notes/010/</a></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Write functions for the pivot table (freq/recency)</span>
+<span class="c1"># TODO: Finish off the remaining diagnosis plots</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

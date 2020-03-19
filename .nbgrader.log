@@ -1122,3 +1122,647 @@
 [LabApp | INFO] Saving file at /_data/toc.yml
 [LabApp | INFO] Saving file at /_data/toc.yml
 [LabApp | INFO] Saving file at /_data/toc.yml
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0
+[LabApp | INFO] Saving file at /content/clv/intro.ipynb
+[LabApp | INFO] Saving intro.ipynb
+[LabApp | INFO] Starting buffering for af6ae4fa-9ee0-4af2-8406-b8bd81dce936:c504899a-6a9c-4e4e-86cf-71d77f3d90b8
+[LabApp | INFO] Starting buffering for 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0:bd4b0509-a87d-46e8-9e1c-749644cfce79
+[LabApp | INFO] Starting buffering for f93919ee-13a9-4aa6-a71f-7a315bec5ba7:6ccefbf0-ae3f-4e3b-a69d-f8fa32237fca
+[LabApp | INFO] Starting buffering for cc9580d6-4a87-4a03-9a00-a1fb61d681da:9bb1ed65-11f4-4254-920b-ad96eb764689
+[LabApp | INFO] Starting buffering for 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676:a4ad8215-d108-40c9-b654-74afa8fc1f93
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0
+[LabApp | INFO] Adapting to protocol v5.1 for kernel af6ae4fa-9ee0-4af2-8406-b8bd81dce936
+[LabApp | INFO] Restoring connection for af6ae4fa-9ee0-4af2-8406-b8bd81dce936:c504899a-6a9c-4e4e-86cf-71d77f3d90b8
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0
+[LabApp | INFO] Adapting to protocol v5.1 for kernel f93919ee-13a9-4aa6-a71f-7a315bec5ba7
+[LabApp | INFO] Restoring connection for f93919ee-13a9-4aa6-a71f-7a315bec5ba7:6ccefbf0-ae3f-4e3b-a69d-f8fa32237fca
+[LabApp | INFO] Adapting to protocol v5.1 for kernel cc9580d6-4a87-4a03-9a00-a1fb61d681da
+[LabApp | INFO] Restoring connection for cc9580d6-4a87-4a03-9a00-a1fb61d681da:9bb1ed65-11f4-4254-920b-ad96eb764689
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Starting buffering for 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676:ccab5497-55d1-434c-9ace-3a2d51defb39
+[LabApp | INFO] Starting buffering for cc9580d6-4a87-4a03-9a00-a1fb61d681da:9bb1ed65-11f4-4254-920b-ad96eb764689
+[LabApp | INFO] Starting buffering for f93919ee-13a9-4aa6-a71f-7a315bec5ba7:6ccefbf0-ae3f-4e3b-a69d-f8fa32237fca
+[LabApp | INFO] Starting buffering for af6ae4fa-9ee0-4af2-8406-b8bd81dce936:c504899a-6a9c-4e4e-86cf-71d77f3d90b8
+[LabApp | INFO] Starting buffering for 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0:6afa5c92-5e09-497a-a815-34860b118d2f
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Adapting to protocol v5.1 for kernel cc9580d6-4a87-4a03-9a00-a1fb61d681da
+[LabApp | INFO] Restoring connection for cc9580d6-4a87-4a03-9a00-a1fb61d681da:9bb1ed65-11f4-4254-920b-ad96eb764689
+[LabApp | INFO] Adapting to protocol v5.1 for kernel f93919ee-13a9-4aa6-a71f-7a315bec5ba7
+[LabApp | INFO] Restoring connection for f93919ee-13a9-4aa6-a71f-7a315bec5ba7:6ccefbf0-ae3f-4e3b-a69d-f8fa32237fca
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0
+[LabApp | INFO] Adapting to protocol v5.1 for kernel af6ae4fa-9ee0-4af2-8406-b8bd81dce936
+[LabApp | INFO] Restoring connection for af6ae4fa-9ee0-4af2-8406-b8bd81dce936:c504899a-6a9c-4e4e-86cf-71d77f3d90b8
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0
+[LabApp | INFO] Starting buffering for af6ae4fa-9ee0-4af2-8406-b8bd81dce936:c504899a-6a9c-4e4e-86cf-71d77f3d90b8
+[LabApp | INFO] Starting buffering for 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0:bd4b0509-a87d-46e8-9e1c-749644cfce79
+[LabApp | INFO] Starting buffering for f93919ee-13a9-4aa6-a71f-7a315bec5ba7:6ccefbf0-ae3f-4e3b-a69d-f8fa32237fca
+[LabApp | INFO] Starting buffering for cc9580d6-4a87-4a03-9a00-a1fb61d681da:9bb1ed65-11f4-4254-920b-ad96eb764689
+[LabApp | INFO] Starting buffering for 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676:a4ad8215-d108-40c9-b654-74afa8fc1f93
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0
+[LabApp | INFO] Adapting to protocol v5.1 for kernel af6ae4fa-9ee0-4af2-8406-b8bd81dce936
+[LabApp | INFO] Restoring connection for af6ae4fa-9ee0-4af2-8406-b8bd81dce936:c504899a-6a9c-4e4e-86cf-71d77f3d90b8
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0
+[LabApp | INFO] Adapting to protocol v5.1 for kernel f93919ee-13a9-4aa6-a71f-7a315bec5ba7
+[LabApp | INFO] Restoring connection for f93919ee-13a9-4aa6-a71f-7a315bec5ba7:6ccefbf0-ae3f-4e3b-a69d-f8fa32237fca
+[LabApp | INFO] Adapting to protocol v5.1 for kernel cc9580d6-4a87-4a03-9a00-a1fb61d681da
+[LabApp | INFO] Restoring connection for cc9580d6-4a87-4a03-9a00-a1fb61d681da:9bb1ed65-11f4-4254-920b-ad96eb764689
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Starting buffering for 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676:ccab5497-55d1-434c-9ace-3a2d51defb39
+[LabApp | INFO] Starting buffering for cc9580d6-4a87-4a03-9a00-a1fb61d681da:9bb1ed65-11f4-4254-920b-ad96eb764689
+[LabApp | INFO] Starting buffering for f93919ee-13a9-4aa6-a71f-7a315bec5ba7:6ccefbf0-ae3f-4e3b-a69d-f8fa32237fca
+[LabApp | INFO] Starting buffering for af6ae4fa-9ee0-4af2-8406-b8bd81dce936:c504899a-6a9c-4e4e-86cf-71d77f3d90b8
+[LabApp | INFO] Starting buffering for 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0:6afa5c92-5e09-497a-a815-34860b118d2f
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Adapting to protocol v5.1 for kernel cc9580d6-4a87-4a03-9a00-a1fb61d681da
+[LabApp | INFO] Restoring connection for cc9580d6-4a87-4a03-9a00-a1fb61d681da:9bb1ed65-11f4-4254-920b-ad96eb764689
+[LabApp | INFO] Adapting to protocol v5.1 for kernel f93919ee-13a9-4aa6-a71f-7a315bec5ba7
+[LabApp | INFO] Restoring connection for f93919ee-13a9-4aa6-a71f-7a315bec5ba7:6ccefbf0-ae3f-4e3b-a69d-f8fa32237fca
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0
+[LabApp | INFO] Adapting to protocol v5.1 for kernel af6ae4fa-9ee0-4af2-8406-b8bd81dce936
+[LabApp | INFO] Restoring connection for af6ae4fa-9ee0-4af2-8406-b8bd81dce936:c504899a-6a9c-4e4e-86cf-71d77f3d90b8
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0
+[LabApp | INFO] Starting buffering for af6ae4fa-9ee0-4af2-8406-b8bd81dce936:c504899a-6a9c-4e4e-86cf-71d77f3d90b8
+[LabApp | INFO] Starting buffering for 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0:bd4b0509-a87d-46e8-9e1c-749644cfce79
+[LabApp | INFO] Starting buffering for f93919ee-13a9-4aa6-a71f-7a315bec5ba7:6ccefbf0-ae3f-4e3b-a69d-f8fa32237fca
+[LabApp | INFO] Starting buffering for cc9580d6-4a87-4a03-9a00-a1fb61d681da:9bb1ed65-11f4-4254-920b-ad96eb764689
+[LabApp | INFO] Starting buffering for 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676:a4ad8215-d108-40c9-b654-74afa8fc1f93
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0
+[LabApp | INFO] Adapting to protocol v5.1 for kernel af6ae4fa-9ee0-4af2-8406-b8bd81dce936
+[LabApp | INFO] Restoring connection for af6ae4fa-9ee0-4af2-8406-b8bd81dce936:c504899a-6a9c-4e4e-86cf-71d77f3d90b8
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 98b0376c-77d7-4de3-9a6b-0e67dae9a7d0
+[LabApp | INFO] Adapting to protocol v5.1 for kernel f93919ee-13a9-4aa6-a71f-7a315bec5ba7
+[LabApp | INFO] Restoring connection for f93919ee-13a9-4aa6-a71f-7a315bec5ba7:6ccefbf0-ae3f-4e3b-a69d-f8fa32237fca
+[LabApp | INFO] Adapting to protocol v5.1 for kernel cc9580d6-4a87-4a03-9a00-a1fb61d681da
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | INFO] Restoring connection for cc9580d6-4a87-4a03-9a00-a1fb61d681da:9bb1ed65-11f4-4254-920b-ad96eb764689
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 4de5bd8e-c2ad-41fb-aa52-c0f1bf09c676
+[LabApp | WARNING] No nbgrader_config.py file found (rerun with --debug to see where nbgrader is looking)
+[LabApp | INFO] Loading the validate_assignment nbgrader serverextension
+[LabApp | WARNING] JupyterLab server extension not enabled, manually loading...
+[LabApp | INFO] JupyterLab extension loaded from /Users/kailu/.pyenv/versions/3.6.5/lib/python3.6/site-packages/jupyterlab
+[LabApp | INFO] JupyterLab application directory is /Users/kailu/.pyenv/versions/3.6.5/share/jupyter/lab
+[LabApp | INFO] Serving notebooks from local directory: /Users/kailu/Desktop/Projects/code-snippets
+[LabApp | INFO] The Jupyter Notebook is running at:
+[LabApp | INFO] http://localhost:8888/?token=2036bc19f8557eb038db4d058c077a5a60703cfb7f2d965f
+[LabApp | INFO] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[LabApp | CRITICAL] 
+    
+    To access the notebook, open this file in a browser:
+        file:///Users/kailu/Library/Jupyter/runtime/nbserver-20936-open.html
+    Or copy and paste one of these URLs:
+        http://localhost:8888/?token=2036bc19f8557eb038db4d058c077a5a60703cfb7f2d965f
+[LabApp | WARNING] 404 GET /github?1584492928680 (::1) 62.74ms referer=http://localhost:8888/lab
+[LabApp | WARNING] The extension "jupyterlab-chart-editor" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-font-dejavu-sans-mono" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-fonts" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-font-anonymous-pro" is outdated.
+    
+[LabApp | WARNING] The extension "@deathbeds/jupyterlab-font-fira-code" is outdated.
+    
+[LabApp | INFO] Build is up to date
+[LabApp | INFO] Kernel started: 361b0e41-ff19-4639-91b6-697aa890da94
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 361b0e41-ff19-4639-91b6-697aa890da94
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 361b0e41-ff19-4639-91b6-697aa890da94
+[LabApp | INFO] Kernel started: 2879034c-e4c4-40c7-b50b-9f5e33c39f75
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 2879034c-e4c4-40c7-b50b-9f5e33c39f75
+[LabApp | INFO] Saving file at /_data/toc.yml
+[LabApp | INFO] Saving file at /content/clv/discrete-contractual.ipynb
+[LabApp | INFO] Saving discrete-contractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-contractual.ipynb
+[LabApp | INFO] Saving discrete-contractual.ipynb
+[LabApp | INFO] Creating new notebook in /content/clv
+[LabApp | INFO] Saving Untitled.ipynb
+[LabApp | INFO] Kernel started: 46be8069-b3f3-4eaf-a0ad-65b066ad0c81
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 46be8069-b3f3-4eaf-a0ad-65b066ad0c81
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Starting buffering for 46be8069-b3f3-4eaf-a0ad-65b066ad0c81:8fafd8bd-51fb-4852-b149-41141095bd79
+[LabApp | INFO] Starting buffering for 2879034c-e4c4-40c7-b50b-9f5e33c39f75:f9c6249f-ee50-42cb-b34d-47dd1784963a
+[LabApp | INFO] Starting buffering for 361b0e41-ff19-4639-91b6-697aa890da94:7f123666-6b26-46a6-9ca4-7579b836e6bb
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 46be8069-b3f3-4eaf-a0ad-65b066ad0c81
+[LabApp | INFO] Restoring connection for 46be8069-b3f3-4eaf-a0ad-65b066ad0c81:8fafd8bd-51fb-4852-b149-41141095bd79
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 2879034c-e4c4-40c7-b50b-9f5e33c39f75
+[LabApp | INFO] Restoring connection for 2879034c-e4c4-40c7-b50b-9f5e33c39f75:f9c6249f-ee50-42cb-b34d-47dd1784963a
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 361b0e41-ff19-4639-91b6-697aa890da94
+[LabApp | INFO] Restoring connection for 361b0e41-ff19-4639-91b6-697aa890da94:7f123666-6b26-46a6-9ca4-7579b836e6bb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Starting buffering for 361b0e41-ff19-4639-91b6-697aa890da94:7f123666-6b26-46a6-9ca4-7579b836e6bb
+[LabApp | INFO] Starting buffering for 2879034c-e4c4-40c7-b50b-9f5e33c39f75:f9c6249f-ee50-42cb-b34d-47dd1784963a
+[LabApp | INFO] Starting buffering for 46be8069-b3f3-4eaf-a0ad-65b066ad0c81:8fafd8bd-51fb-4852-b149-41141095bd79
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 361b0e41-ff19-4639-91b6-697aa890da94
+[LabApp | INFO] Restoring connection for 361b0e41-ff19-4639-91b6-697aa890da94:7f123666-6b26-46a6-9ca4-7579b836e6bb
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 2879034c-e4c4-40c7-b50b-9f5e33c39f75
+[LabApp | INFO] Restoring connection for 2879034c-e4c4-40c7-b50b-9f5e33c39f75:f9c6249f-ee50-42cb-b34d-47dd1784963a
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 46be8069-b3f3-4eaf-a0ad-65b066ad0c81
+[LabApp | INFO] Restoring connection for 46be8069-b3f3-4eaf-a0ad-65b066ad0c81:8fafd8bd-51fb-4852-b149-41141095bd79
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/intro.ipynb
+[LabApp | INFO] Saving intro.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /_data/toc.yml
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /_data/toc.yml
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | WARNING] delete /content/data/discrete-noncontractual.csv
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Creating new notebook in /content/clv
+[LabApp | INFO] Saving Untitled.ipynb
+[LabApp | INFO] Kernel started: b21adb1b-9cb6-44f3-a472-9a950a4ddbc6
+[LabApp | INFO] Adapting to protocol v5.1 for kernel b21adb1b-9cb6-44f3-a472-9a950a4ddbc6
+[LabApp | INFO] Saving file at /content/clv/BB-example.ipynb
+[LabApp | INFO] Saving BB-example.ipynb
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 2879034c-e4c4-40c7-b50b-9f5e33c39f75
+[LabApp | INFO] Saving file at /content/clv/discrete-contractual.ipynb
+[LabApp | INFO] Saving discrete-contractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-contractual.ipynb
+[LabApp | INFO] Saving discrete-contractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BB-example.ipynb
+[LabApp | INFO] Saving BB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BB-example.ipynb
+[LabApp | INFO] Saving BB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BB-example.ipynb
+[LabApp | INFO] Saving BB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB.py
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Uploading file to /content/discrete-noncontractual-figure-1.png
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Uploading file to /content/discrete-noncontractual-figure-2.png
+[LabApp | INFO] Uploading file to /content/discrete-noncontractual-figure-3.png
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Uploading file to /content/discrete-noncontractual-figure-5.png
+[LabApp | INFO] Uploading file to /content/discrete-noncontractual-figure-4.png
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB.py
+[LabApp | INFO] Saving file at /content/clv/BGBB.py
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB.py
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB.py
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Starting buffering for b21adb1b-9cb6-44f3-a472-9a950a4ddbc6:de190c22-8d84-45c2-ae95-2810ad37c518
+[LabApp | INFO] Kernel shutdown: b21adb1b-9cb6-44f3-a472-9a950a4ddbc6
+[LabApp | INFO] Kernel started: 967722dd-2078-4043-ae1c-f50016ef2225
+[LabApp | INFO] Adapting to protocol v5.1 for kernel 967722dd-2078-4043-ae1c-f50016ef2225
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB.py
+[LabApp | INFO] Saving file at /content/clv/BGBB.py
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Kernel restarted: 967722dd-2078-4043-ae1c-f50016ef2225
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Kernel interrupted: 967722dd-2078-4043-ae1c-f50016ef2225
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB.py
+[LabApp | INFO] Kernel restarted: 967722dd-2078-4043-ae1c-f50016ef2225
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB.py
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
+[LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Saving file at /content/clv/BGBB-example.ipynb
+[LabApp | INFO] Saving BGBB-example.ipynb
+[LabApp | INFO] Saving file at /_data/toc.yml
+[LabApp | INFO] Saving file at /_data/toc.yml
