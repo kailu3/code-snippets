@@ -1,2 +1,2 @@
-This is a juyter-book compiling some useful code-snippets I've used over the past year of learning Python for data analysis. This is purely for the purpose of me being able to reuse code without having to open 20 million notebooks to search for code to copy and paste.
+This is a jupyter-book compiling some useful code-snippets I've used over the past year of learning Python for data analysis. This is purely for the purpose of me being able to reuse code without having to open 20 million notebooks to search for code to copy and paste.
 - Kai

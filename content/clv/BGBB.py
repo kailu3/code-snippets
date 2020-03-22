@@ -148,3 +148,27 @@ def cond_expectations_df(df, p):
                          'recency': t_x_list,
                          'n': n_list,
                          'ce': ce_list})
+
+
+def marg_posterior_p(alpha, beta, gamma, delta, x, t_x, n, p):
+    '''The marginal posterior distribution of p'''
+    b1 = (p**(alpha+x-1) * (1-p)**(beta+n-x-1)
+         / sc.beta(alpha, beta)
+         * sc.beta(gamma, delta+n)/sc.beta(gamma, delta))
+    b2 = [(p**(alpha+x-1) * (1-p)**(beta+t_x-x+i-1)
+          / sc.beta(alpha, beta)
+          * sc.beta(gamma+1, delta+t_x+i)
+          / sc.beta(gamma, delta))
+          for i in range(0, n-t_x)]
+    return (b1 + sum(b2)) / ilikelihood(alpha, beta, gamma, delta, x, t_x, n)
+
+
+def marg_posterior_theta(alpha, beta, gamma, delta, x, t_x, n, theta):
+    '''The marginal posterior distribution of theta'''
+    c1 = (sc.beta(alpha+x, beta+n-x) / sc.beta(alpha, beta)
+          * theta**(gamma-1) * (1-theta)**(delta+n-1)
+          / sc.beta(gamma, delta))
+    c2 = [(sc.beta(alpha+x, beta+t_x-x+i) / sc.beta(alpha, beta)
+          * theta**gamma * (1-theta)**(delta+t_x+i-1) / sc.beta(gamma, delta))
+          for i in range(0, n-t_x)]
+    return (c1 + sum(c2)) / ilikelihood(alpha, beta, gamma, delta, x, t_x, n)
