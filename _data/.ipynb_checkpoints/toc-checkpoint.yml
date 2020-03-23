@@ -56,8 +56,9 @@
   not_numbered: true
   expand_sections: false
   sections:
-  - url: /models/linear
-  - url: /models/logistic
+  - url: /models/linear-regression
+  - url: /models/poisson-regression
+  - url: /models/logistic-regression
   - url: /models/forest
     
     
@@ -82,5 +83,7 @@
     url: /clv/discrete-contractual
   - title: Discrete Non-Contractual
     url: /clv/discrete-noncontractual
-  - title: BGBB example
-    url: /clv/BGBB-example
+#   - title: BGBB example
+#     url: /clv/BGBB-example
+  - title: HB-BGBB
+    url: /clv/HB-BGBB

@@ -2307,3 +2307,12 @@
 [LabApp | INFO] Saving discrete-noncontractual.ipynb
 [LabApp | INFO] Saving file at /content/clv/discrete-noncontractual.ipynb
 [LabApp | INFO] Saving discrete-noncontractual.ipynb
+[LabApp | INFO] Starting buffering for b930179f-f7ea-4625-8846-de81c2906459:bf87cbf9-4d10-44b0-ad3f-e8825f218ee0
+[LabApp | INFO] Starting buffering for 46be8069-b3f3-4eaf-a0ad-65b066ad0c81:8fafd8bd-51fb-4852-b149-41141095bd79
+[LabApp | INFO] Starting buffering for 77060f6d-7721-407e-9e77-1ee1c131d9e7:32d25bd6-f1d6-4292-b9f3-1e28e05d25a5
+[LabApp | INFO] interrupted
+[LabApp | CRITICAL] Shutdown confirmed
+[LabApp | INFO] Shutting down 3 kernels
+[LabApp | INFO] Kernel shutdown: 46be8069-b3f3-4eaf-a0ad-65b066ad0c81
+[LabApp | INFO] Kernel shutdown: 77060f6d-7721-407e-9e77-1ee1c131d9e7
+[LabApp | INFO] Kernel shutdown: b930179f-f7ea-4625-8846-de81c2906459
