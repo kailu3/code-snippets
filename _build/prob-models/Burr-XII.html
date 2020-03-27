@@ -11,7 +11,7 @@ pagenum: 22
 prev_page:
   url: /prob-models/Beta-Binomial.html
 next_page:
-  url: /clv/intro.html
+  url: /prob-models/Variants-of-NBD.html
 suffix: .ipynb
 search: alert div data trial want clean pareto ii weibull class block info inctrl modeling timing product specifically model take individual t behavior interest prob nesting inside doesnt seem very right fix later actually easier query cumulative means input functions week example plot results holdout pretty apparent tends overforecast since assumes hardcore never buyers visually looks fit better
 
@@ -76,7 +76,7 @@ I actually find it easier to query Inc_trl data than cumulative trial data, whic
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_probabilities</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">inc_trl</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compute_probabilities</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Compute the cumulative probability for each time period&#39;&#39;&#39;</span>
     <span class="n">p</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">period</span><span class="p">)):</span>
@@ -97,7 +97,7 @@ I actually find it easier to query Inc_trl data than cumulative trial data, whic
         <span class="n">probabilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cumu_prob</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">cumu_prob</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
     
     <span class="n">ll</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inc_trl</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">probabilities</span><span class="p">)))</span> <span class="o">+</span> \
-    <span class="p">(</span><span class="n">panel_size</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Inc_trl_list</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cumu_prob</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">(</span><span class="n">panel_size</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">inc_trl</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cumu_prob</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">ll</span>
 

@@ -71,6 +71,9 @@
   - url: /prob-models/Negative-Binomial
   - url: /prob-models/Beta-Binomial
   - url: /prob-models/Burr-XII
+  - url: /prob-models/Variants-of-NBD
+  - url: /prob-models/negative-binomial-regression
+  - url: /prob-models/Time-Varying-Covariates
   
   
 
